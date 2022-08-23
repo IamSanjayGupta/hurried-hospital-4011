@@ -24,3 +24,4 @@ yarn-error.log*
 
 #environmental file
 .env
+.env
