@@ -23,12 +23,13 @@ const PopulerSearches = () => {
           {tags.map((tag) => {
             return (
               <Button
+                key={tag}
                 leftIcon={<SearchIcon />}
                 colorScheme="gray"
                 fontSize={"0.9rem"}
                 fontWeight={400}
                 _focus={{
-                  boxShadow: "0 0 1px 2px rgba(65,105,255)",
+                  boxShadow: "0 0 0 2px #fff, 0 0 0 4px #085ff7",
                 }}
               >
                 {tag}
