@@ -28,13 +28,13 @@ import { MdReviews, MdHelp } from "react-icons/md";
 import { FaUserAlt, FaBell } from "react-icons/fa";
 import { ImProfile, ImHeart, ImCogs, ImMail } from "react-icons/im";
 const Links = [
-  { path: "/findJob", name: "Find Jobs" },
+  { path: "/", name: "Find Jobs" },
   { path: "/companyReviews", name: "Company reviews" },
   { path: "/salaryGuide", name: "Salary Guide" },
 ];
 
 const AllLinks = [
-  { path: "/findJob", name: "Find Jobs" },
+  { path: "/", name: "Find Jobs" },
   { path: "/companyReviews", name: "Company reviews" },
   { path: "/salaryGuide", name: "Salary Guide" },
   { path: "/messages", name: "Messages" },
@@ -76,13 +76,13 @@ const Navbar = () => {
                 navigate("/");
               }}
             >
-              <img src={logo} className="" alt="logo" />
+              <img src={logo} className="" alt="logo" height="50" width="130" />
               <img
                 src="https://d3fw5vlhllyvee.cloudfront.net/dist/header/ukraine_support.7ad2b5d444bc427dbc5d.png"
                 className=""
                 alt="logo"
-                width="40"
-                height="40"
+                width="50"
+                height="50"
               />
             </HStack>
             <HStack as={"nav"} spacing={4} display={{ base: "none", md: "flex" }}>
