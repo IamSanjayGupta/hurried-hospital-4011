@@ -50,6 +50,7 @@
 /* Handle */
 ::-webkit-scrollbar-thumb {
   background: rgb(196, 196, 196);
+  border-radius: 40%;
 }
 
 /* Handle on hover */
