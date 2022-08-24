@@ -1,5 +1,5 @@
 import React from "react";
-import logo from "../assets/Logo.svg";
+import logo from "../assets/Icons/Logo.svg";
 import "../index.css";
 import {
   Box,

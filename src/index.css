@@ -10,26 +10,6 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
 }
 
-/* .customeLinks {
-cursor: pointer;
-text-decoration: none;
-    cursor: "pointer",
-    textDecoration: "none",
-    outLine: "2px solid transparent",
-    outLineOffset: "2px",
-    color: "inherit",
-    width: "fitContent",
-} */
-
-/* <NavLink
-to={path}
-style={({ isActive }) =>
-  isActive ? { borderBottom: "2px Solid blue", paddingBottom: "22px" } : undefined
-}
-// style={style}
->
-{name}
-</NavLink> */
 .customeLinks {
   transition-property: var(--chakra-transition-property-common);
   transition-duration: var(--chakra-transition-duration-fast);
