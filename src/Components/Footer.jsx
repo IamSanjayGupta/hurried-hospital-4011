@@ -37,7 +37,7 @@ const Footer = () => {
         </Center>
         <Box w={{ base: "100%", md: "50%" }}>
           <VStack>
-            <Heading>Explorer Indeed</Heading>
+            <Heading>Explore Indeed</Heading>
             <Flex justifyContent={"space-evenly"} width={"100%"}>
               <VStack align="stretch">
                 <Link>Career Explorer</Link>
