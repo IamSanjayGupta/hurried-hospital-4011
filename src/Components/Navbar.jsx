@@ -141,7 +141,14 @@ const Navbar = () => {
           </Flex>
           <Flex display={{ base: "flex", md: "none" }}>
             <Menu>
-              <MenuButton as={Button} variant={"ghost"} colorScheme={"blue"} fontSize={"xl"} py={8}>
+              <MenuButton
+                as={Button}
+                variant={"ghost"}
+                borderRadius={"none"}
+                colorScheme={"blue"}
+                fontSize={"xl"}
+                py={8}
+              >
                 <FaUserAlt />
               </MenuButton>
               <MenuList mt={-2}>
