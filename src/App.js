@@ -4,15 +4,17 @@ import Footer from "./components/Footer";
 import FooterNormal from "./components/FooterNormal";
 import PopulerSearches from "./components/PopulerSearches";
 import SearchInput from "./components/SearchInput";
+import PasswordForm from "./components/PasswordForm";
 
 function App() {
   return (
     <div className="App">
-      <Navbar />
+      <PasswordForm />
+      {/* <Navbar />
       <SearchInput />
       <PopulerSearches />
+      <Footer /> */}
       <FooterNormal />
-      <Footer />
     </div>
   );
 }
