@@ -40,7 +40,7 @@ const SignupForm = () => {
     const token = Date.now() + email.length;
     const emailData = {
       body: VarificationTemplate({
-        link: `${process.env.REACT_APP_BASE_URL}/setPassword?token=${token}`,
+        link: `${process.env.REACT_APP_BASE_URL}/setPassword/${token}`,
         to: email,
       }),
       to: email,

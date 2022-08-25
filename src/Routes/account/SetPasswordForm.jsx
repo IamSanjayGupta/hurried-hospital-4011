@@ -1,4 +1,8 @@
 import {
+  Alert,
+  AlertIcon,
+  AlertTitle,
+  Box,
   Button,
   Container,
   FormControl,
@@ -9,14 +13,36 @@ import {
   Text,
   VStack,
 } from "@chakra-ui/react";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import logo from "../../assets/Icons/Logo.svg";
-import { Link } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { StarIcon } from "@chakra-ui/icons";
 import { sendEmail } from "../../utils/backendmailer";
 import FooterNormal from "../../components/FooterNormal";
-const SetPasswordForm = ({ email = "Sanjay.g.258@gmail.com" }) => {
-  // sendEmail({ to: email, subject: "HELLL", body: "JJJJJJJ" });
+import { checkTokenApi } from "../../utils/api";
+
+const SetPasswordForm = () => {
+  const { token } = useParams();
+  const [email, setEmail] = useState("");
+  const [tokenErr, setTokenErr] = useState(false);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    checkTokenApi({ token })
+      .then((res) => {
+        if (res.data.length) {
+          setEmail(res.data[0].email);
+        } else {
+          setTokenErr(true);
+          setTimeout(() => {
+            navigate("/login");
+          }, 3000);
+        }
+      })
+      .catch((err) => console.error(err))
+      .finally();
+  }, []);
+
   return (
     <>
       <Container my="5vh" centerContent>
@@ -31,9 +57,19 @@ const SetPasswordForm = ({ email = "Sanjay.g.258@gmail.com" }) => {
           boxShadow={"rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px"}
         >
           <Heading fontSize={22}>Set Your Password</Heading>
-          <Text>
-            Email: <b> {email} </b>
-          </Text>
+          {tokenErr ? (
+            <Alert status="error">
+              <AlertIcon />
+              <Box>
+                <AlertTitle>Token Expired!</AlertTitle>
+              </Box>
+            </Alert>
+          ) : (
+            <Text>
+              Email: <b> {email} </b>
+            </Text>
+          )}
+
           <div></div>
           <FormControl>
             <Text>
@@ -67,7 +103,6 @@ const SetPasswordForm = ({ email = "Sanjay.g.258@gmail.com" }) => {
               }}
             />
           </FormControl>
-
           <Button colorScheme="facebook" fontWeight={"bold"}>
             Submit
           </Button>

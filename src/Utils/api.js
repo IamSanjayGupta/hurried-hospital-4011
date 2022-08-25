@@ -28,3 +28,7 @@ export const addTokenApi = ({ data }) => {
     token: data.token,
   });
 };
+
+export const checkTokenApi = ({ token }) => {
+  return axios.get(`${process.env.REACT_APP_BASE_URL_API}/pendingAccounts?token=${token}&_limit=1`);
+};
