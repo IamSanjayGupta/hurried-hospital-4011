@@ -9,7 +9,7 @@ import {
   VStack,
 } from "@chakra-ui/react";
 import React from "react";
-import logo from "../assets/Icons/Logo.svg";
+import logo from "../../assets/Icons/Logo.svg";
 import { Link } from "react-router-dom";
 import { StarIcon } from "@chakra-ui/icons";
 const PasswordForm = ({ email = "Sanjay.g.258@gmail.com" }) => {
