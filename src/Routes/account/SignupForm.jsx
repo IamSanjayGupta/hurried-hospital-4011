@@ -20,16 +20,6 @@ import { sendMail } from "../../utils/mailer";
 import { VarificationTemplate } from "../../utils/email_Templates/VarificationTemplate";
 import { addTokenApi } from "../../utils/api";
 
-const sendVarificationEmail = ({ emailData }) => {
-  sendMail({ template: "email_varification", data: emailData })
-    .then((res) => {
-      console.log(res);
-    })
-    .catch((err) => {
-      console.error(err);
-    });
-};
-
 const SignupForm = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const email = searchParams.get("email") || null;
@@ -54,6 +44,16 @@ const SignupForm = () => {
       .finally();
   };
 
+  const sendVarificationEmail = ({ emailData }) => {
+    sendMail({ template: "email_varification", data: emailData })
+      .then((res) => {
+        setIsMailSent(true);
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  };
+
   return (
     <>
       <Container my="7vh" centerContent>
@@ -72,7 +72,7 @@ const SignupForm = () => {
           <div></div>
           <Text>
             Continue as <b>{email} </b>
-            <Link to="/singup" style={{ color: "blue" }}>
+            <Link to="/login" style={{ color: "blue" }}>
               (not you?)
             </Link>
           </Text>
@@ -83,13 +83,18 @@ const SignupForm = () => {
               <Box>
                 <AlertTitle>Success!</AlertTitle>
                 <AlertDescription>
-                  We have sent your an email for email address varification.
+                  We have sent you an email for email address varification.
                 </AlertDescription>
               </Box>
             </Alert>
           ) : null}
 
-          <Button colorScheme="facebook" fontWeight={"bold"} onClick={handleSendClick}>
+          <Button
+            colorScheme="facebook"
+            fontWeight={"bold"}
+            onClick={handleSendClick}
+            disabled={isMailSent}
+          >
             Create an Account
           </Button>
           <Link to="/login" style={{ color: "blue" }}>
