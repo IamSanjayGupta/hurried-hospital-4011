@@ -25,9 +25,10 @@ const SearchInput = () => {
       dispatch(func(e.target.value));
     }, delay);
   };
+
   return (
     <Container maxW={"container.lg"}>
-      <form action="">
+      <form onSubmit={(e) => e.preventDefault()}>
         <Flex
           my={10}
           justifyContent={"center"}

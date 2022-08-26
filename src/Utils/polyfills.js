@@ -7,3 +7,7 @@ export const capitalize = function (input) {
   });
   return CapitalizedWords.join(" ");
 };
+
+export const getJobBullets = (str) => {
+  return str.slice(str.indexOf("<ul>"), str.indexOf("</ul>") + 5);
+};
