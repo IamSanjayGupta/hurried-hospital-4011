@@ -12,6 +12,12 @@ export const getUsersApi = () => {
   return axios.get(`${REACT_APP_BASE_URL_API}/users`);
 };
 
+export const addUsers = ({ data }) => {
+  return axios.post(`${process.env.REACT_APP_BASE_URL_API}/users`, {
+    ...data,
+  });
+};
+
 export const checkEmailApi = ({ email }) => {
   return axios.get(`${process.env.REACT_APP_BASE_URL_API}/users?email=${email}&_limit=1`);
 };
@@ -27,6 +33,10 @@ export const addTokenApi = ({ data }) => {
     email: data.email,
     token: data.token,
   });
+};
+
+export const removeTokenApi = ({ id }) => {
+  return axios.delete(`${process.env.REACT_APP_BASE_URL_API}/pendingAccounts/${id}`);
 };
 
 export const checkTokenApi = ({ token }) => {

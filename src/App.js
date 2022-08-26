@@ -10,6 +10,7 @@ import SignupForm from "./routes/account/SignupForm";
 import SetPasswordForm from "./routes/account/SetPasswordForm";
 import { sendMail } from "./utils/mailer";
 import AllRoutes from "./routes/AllRoutes";
+import { decrypt, ecrypt } from "./utils/ecryptDecrypt";
 
 function App() {
   // const data = { body: "THIS IS G", to: "sanjayg.8237@gmail.com" };

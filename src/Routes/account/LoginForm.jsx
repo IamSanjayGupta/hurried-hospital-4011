@@ -26,7 +26,7 @@ const LoginForm = () => {
 
   const handleForm = (e) => {
     e.preventDefault();
-    checkEmailApi({ email: email })
+    checkEmailApi({ email: email.toLowerCase() })
       .then((res) => {
         console.log(res.data);
         if (res.data.length) {

@@ -18,7 +18,9 @@ import logo from "../../assets/Icons/Logo.svg";
 import { Link, Navigate, useNavigate, useSearchParams } from "react-router-dom";
 import { StarIcon } from "@chakra-ui/icons";
 import FooterNormal from "../../components/FooterNormal";
-import { checkEmailPassApi } from "../../utils/api";
+import { checkEmailApi, checkEmailPassApi } from "../../utils/api";
+import { decrypt } from "../../utils/ecryptDecrypt";
+
 const PasswordForm = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const email = searchParams.get("email") || null;
@@ -31,9 +33,9 @@ const PasswordForm = () => {
 
   const handleForm = (e) => {
     e.preventDefault();
-    checkEmailPassApi({ email: email.toLocaleLowerCase(), password: password })
+    checkEmailApi({ email: email.toLowerCase() })
       .then((res) => {
-        if (res.data.length) {
+        if (decrypt(res.data[0].password) === password) {
           navigate("/");
         } else {
           setPassword("");
