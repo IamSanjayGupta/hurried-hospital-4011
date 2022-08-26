@@ -1,0 +1,38 @@
+// Use at least Nodemailer v4.1.0
+const nodemailer = require("nodemailer");
+
+const transporter = nodemailer.createTransport({
+  service: "gmail",
+  auth: {
+    user: "webchat.chat@gmail.com",
+    pass: "rcarkwpmzrvjkabm",
+  },
+});
+
+// Message object
+let message = {
+  from: "Indeed Team <Indeed@example.com>",
+  to: "Sanjay <sanjayg.8237@gmail.com>",
+
+  subject: "Urgent Password Change",
+  //   text: "Hello to myself!",
+  html: `Hi`,
+};
+
+transporter.sendMail(message, (err, info) => {
+  if (err) {
+    console.log("Error occurred. " + err.message);
+    return process.exit(1);
+  }
+  console.log("Message sent: %s", info.messageId);
+
+});
+
+
+
+<h1><span style="font-size: 14pt; color: #7e8c8d; font-family: verdana, geneva, sans-serif;">Hello User,</span></h1>
+<p style="line-height: 150%; background: white;"><span style="font-size: 12pt; line-height: 150%; font-family: verdana, geneva, sans-serif; color: #757575;">Thank you for signing up to Indeed! We're excited to have you onboard and will be happy to help you set everything up.</span></p>
+<p style="line-height: 150%; background: white;"><span style="font-size: 12pt; line-height: 150%; font-family: verdana, geneva, sans-serif; color: #757575;">Please confirm your email ({{to}}) by clicking the button below.</span></p>
+<p><span style="font-family: verdana, geneva, sans-serif;"><a style="display: inline-block; border-radius: 2px; box-shadow: 0 2px 5px 0 #d6d6d6; text-decoration: none; padding: 10px 20px; color: white; font-weight: bold; background: #2557a7;" href="https://www.Google.com" target="_blank" rel="noopener">Confirm</a></span></p>
+<p style="line-height: 150%; background: white;"><span style="font-size: 12pt; line-height: 150%; font-family: verdana, geneva, sans-serif; color: #757575;">This link will expire in 24 hours.</span></p>
+<p><span style="color: #34495e; font-family: verdana, geneva, sans-serif;">Best wishes,</span><br><span style="color: #34495e; font-family: verdana, geneva, sans-serif;">Indeed Team</span></p>
