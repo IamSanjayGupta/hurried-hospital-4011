@@ -42,3 +42,13 @@ export const removeTokenApi = ({ id }) => {
 export const checkTokenApi = ({ token }) => {
   return axios.get(`${process.env.REACT_APP_BASE_URL_API}/pendingAccounts?token=${token}&_limit=1`);
 };
+
+//Jobs
+
+export const getJobsApi = ({ what, where, page = 1 }) => {
+  let url = "";
+  if (where)
+    url = `${process.env.REACT_APP_BASE_URL_API}/jobs?q=${what}&city=${where}&_page=${page}`;
+  else url = `${process.env.REACT_APP_BASE_URL_API}/jobs?q=${what}&_page=${page}`;
+  return axios.get(url);
+};

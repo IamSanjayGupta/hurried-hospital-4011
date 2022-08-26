@@ -29,13 +29,13 @@ import { FaUserAlt, FaBell } from "react-icons/fa";
 import { ImProfile, ImHeart, ImCogs, ImMail } from "react-icons/im";
 import { AppContext } from "../context/AppContext";
 const Links = [
-  { path: "/", name: "Find Jobs" },
+  { path: "/jobs", name: "Find Jobs" },
   { path: "/companyReviews", name: "Company reviews" },
   { path: "/salaryGuide", name: "Salary Guide" },
 ];
 
 const AllLinks = [
-  { path: "/", name: "Find Jobs" },
+  { path: "/jobs", name: "Find Jobs" },
   { path: "/companyReviews", name: "Company reviews" },
   { path: "/salaryGuide", name: "Salary Guide" },
   { path: "/messages", name: "Messages" },

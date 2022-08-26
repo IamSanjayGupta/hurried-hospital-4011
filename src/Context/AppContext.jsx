@@ -3,9 +3,11 @@ import { AppReducer } from "./AppReducer";
 
 const initState = {
   isAuth: false,
-  email: null,
+  email: "",
   isLoading: false,
   isError: false,
+  what: "",
+  where: "",
 };
 
 export const AppContext = createContext();

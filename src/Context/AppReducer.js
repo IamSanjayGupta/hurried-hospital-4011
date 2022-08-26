@@ -4,6 +4,10 @@ export const AppReducer = (state, action) => {
       return { ...state, isAuth: action.payload };
     case "SET_EMAIL":
       return { ...state, email: action.payload };
+    case "SET_WHAT":
+      return { ...state, what: action.payload };
+    case "SET_WHERE":
+      return { ...state, where: action.payload };
     default:
       return state;
   }
