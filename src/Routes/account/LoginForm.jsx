@@ -28,7 +28,6 @@ const LoginForm = () => {
     e.preventDefault();
     checkEmailApi({ email: email.toLowerCase() })
       .then((res) => {
-        console.log(res.data);
         if (res.data.length) {
           navigate({
             pathname: "/password",
@@ -41,7 +40,7 @@ const LoginForm = () => {
           });
         }
       })
-      .catch((err) => console.log(err))
+      .catch((err) => console.error(err))
       .finally();
   };
 

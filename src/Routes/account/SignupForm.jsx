@@ -62,7 +62,7 @@ const SignupForm = () => {
           navigate("/login");
         }
       })
-      .catch((err) => console.log(err))
+      .catch((err) => console.error(err))
       .finally();
   }, []);
 
