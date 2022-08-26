@@ -7,7 +7,7 @@ import { AppContext } from "../context/AppContext";
 
 const Home = () => {
   const { state, dispatch } = useContext(AppContext);
-  console.log(state);
+
   return (
     <div>
       <Navbar />

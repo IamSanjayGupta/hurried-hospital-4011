@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import logo from "../assets/Icons/Logo.svg";
 import "../index.css";
 import {
@@ -27,6 +27,7 @@ import { BiMessageDetail } from "react-icons/bi";
 import { MdReviews, MdHelp } from "react-icons/md";
 import { FaUserAlt, FaBell } from "react-icons/fa";
 import { ImProfile, ImHeart, ImCogs, ImMail } from "react-icons/im";
+import { AppContext } from "../context/AppContext";
 const Links = [
   { path: "/", name: "Find Jobs" },
   { path: "/companyReviews", name: "Company reviews" },
@@ -56,6 +57,7 @@ const NavLink1 = ({ path, name }) => (
 );
 
 const Navbar = () => {
+  const { state, dispatch } = useContext(AppContext);
   const { isOpen, onOpen, onClose } = useDisclosure();
   const navigate = useNavigate();
   return (
@@ -110,63 +112,72 @@ const Navbar = () => {
             >
               <FaBell />
             </Button>
-            <Menu>
-              <MenuButton
-                as={Button}
-                variant={"ghost"}
-                borderRadius={"none"}
-                colorScheme={"blue"}
-                fontSize={"xl"}
-                py={8}
-              >
-                <FaUserAlt />
-              </MenuButton>
-              <MenuList mt={-2}>
-                <MenuGroup title="Sanjay.g.258@gmail.com">
-                  <MenuItem icon={<ImProfile />}>Profile</MenuItem>
-                  <MenuItem icon={<ImHeart />}>My Jobs</MenuItem>
-                  <MenuItem icon={<MdReviews />}>My reviews</MenuItem>
-                  <MenuItem icon={<ImMail />}>Email Settings</MenuItem>
-                  <MenuItem icon={<ImCogs />}>Settings</MenuItem>
-                  <MenuItem icon={<MdHelp />}>Help Center</MenuItem>
-                  <MenuDivider />
-                  <MenuItem>Sign out</MenuItem>
-                </MenuGroup>
-              </MenuList>
-            </Menu>
+            {state.isAuth ? (
+              <Menu>
+                <MenuButton
+                  as={Button}
+                  variant={"ghost"}
+                  borderRadius={"none"}
+                  colorScheme={"blue"}
+                  fontSize={"xl"}
+                  py={8}
+                >
+                  <FaUserAlt />
+                </MenuButton>
+                <MenuList mt={-2}>
+                  <MenuGroup title={state.email}>
+                    <MenuItem icon={<ImProfile />}>Profile</MenuItem>
+                    <MenuItem icon={<ImHeart />}>My Jobs</MenuItem>
+                    <MenuItem icon={<MdReviews />}>My reviews</MenuItem>
+                    <MenuItem icon={<ImMail />}>Email Settings</MenuItem>
+                    <MenuItem icon={<ImCogs />}>Settings</MenuItem>
+                    <MenuItem icon={<MdHelp />}>Help Center</MenuItem>
+                    <MenuDivider />
+                    <MenuItem>Sign out</MenuItem>
+                  </MenuGroup>
+                </MenuList>
+              </Menu>
+            ) : (
+              <NavLink1 name={"Sign In"} path={"/login"} />
+            )}
             <Center height={10}>
               <Divider orientation="vertical" />
             </Center>
             <NavLink1 path={"/employer"} name={"Employer / Post Job"} />
           </Flex>
+          {/* only for smalls scrren */}
           <Flex display={{ base: "flex", md: "none" }}>
-            <Menu>
-              <MenuButton
-                as={Button}
-                variant={"ghost"}
-                borderRadius={"none"}
-                colorScheme={"blue"}
-                fontSize={"xl"}
-                py={8}
-              >
-                <FaUserAlt />
-              </MenuButton>
-              <MenuList mt={-2}>
-                <MenuGroup title="Sanjay.g.258@gmail.com">
-                  <MenuItem icon={<ImProfile />}>Profile</MenuItem>
-                  <MenuItem icon={<ImHeart />}>My Jobs</MenuItem>
-                  <MenuItem icon={<MdReviews />}>My reviews</MenuItem>
-                  <MenuItem icon={<ImMail />}>Email Settings</MenuItem>
-                  <MenuItem icon={<ImCogs />}>Settings</MenuItem>
-                  <MenuItem icon={<MdHelp />}>Help Center</MenuItem>
-                  <MenuDivider />
-                  <MenuItem>Sign out</MenuItem>
-                </MenuGroup>
-              </MenuList>
-            </Menu>
+            {state.isAuth ? (
+              <Menu>
+                <MenuButton
+                  as={Button}
+                  variant={"ghost"}
+                  borderRadius={"none"}
+                  colorScheme={"blue"}
+                  fontSize={"xl"}
+                  py={8}
+                >
+                  <FaUserAlt />
+                </MenuButton>
+                <MenuList mt={-2}>
+                  <MenuGroup title={state.email}>
+                    <MenuItem icon={<ImProfile />}>Profile</MenuItem>
+                    <MenuItem icon={<ImHeart />}>My Jobs</MenuItem>
+                    <MenuItem icon={<MdReviews />}>My reviews</MenuItem>
+                    <MenuItem icon={<ImMail />}>Email Settings</MenuItem>
+                    <MenuItem icon={<ImCogs />}>Settings</MenuItem>
+                    <MenuItem icon={<MdHelp />}>Help Center</MenuItem>
+                    <MenuDivider />
+                    <MenuItem>Sign out</MenuItem>
+                  </MenuGroup>
+                </MenuList>
+              </Menu>
+            ) : (
+              <NavLink1 name={"Sign In"} path={"/login"} />
+            )}
           </Flex>
         </Flex>
-
+        {/* only for smalls scrren */}
         {isOpen ? (
           <Box pb={4} display={{ md: "none" }}>
             <Stack as={"nav"}>

@@ -11,9 +11,9 @@ const initState = {
 export const AppContext = createContext();
 
 const AppContextProvider = ({ children }) => {
-  const [state, disptach] = useReducer(AppReducer, initState);
+  const [state, dispatch] = useReducer(AppReducer, initState);
 
-  return <AppContext.Provider value={{ state, disptach }}>{children}</AppContext.Provider>;
+  return <AppContext.Provider value={{ state, dispatch }}>{children}</AppContext.Provider>;
 };
 
 export default AppContextProvider;
