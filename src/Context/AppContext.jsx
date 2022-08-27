@@ -8,6 +8,7 @@ const initState = {
   isError: false,
   what: "",
   where: "",
+  jobs: [],
 };
 
 export const AppContext = createContext();

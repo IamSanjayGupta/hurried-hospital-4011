@@ -48,7 +48,7 @@ export const checkTokenApi = ({ token }) => {
 export const getJobsApi = ({ what, where, page = 1 }) => {
   let url = "";
   if (where)
-    url = `${process.env.REACT_APP_BASE_URL_API}/jobs?q=${what}&city=${where}&_page=${page}`;
-  else url = `${process.env.REACT_APP_BASE_URL_API}/jobs?q=${what}&_page=${page}`;
+    url = `${process.env.REACT_APP_BASE_URL_API}/jobs?q=${what}&city=${where}&_page=${page}&_limit=15`;
+  else url = `${process.env.REACT_APP_BASE_URL_API}/jobs?q=${what}&_page=${page}&_limit=15`;
   return axios.get(url);
 };

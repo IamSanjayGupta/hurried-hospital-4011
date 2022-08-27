@@ -1,7 +1,22 @@
-import { Box, Heading, Text } from "@chakra-ui/react";
+import { HiOutlineOfficeBuilding } from "react-icons/hi";
+import { BiCategory } from "react-icons/bi";
+import {
+  Box,
+  Heading,
+  ListItem,
+  Tag,
+  TagLabel,
+  TagLeftIcon,
+  Text,
+  UnorderedList,
+} from "@chakra-ui/react";
 import React from "react";
+import { getJobBullets } from "../utils/polyfills";
 
-const JobCards = ({ shortdesc = "jo" }) => {
+const JobCards = ({ props }) => {
+  const { job_title, company_name, category, city, is_remote, state, html_job_description } = props;
+  let jobBullets = getJobBullets(html_job_description);
+
   return (
     <Box
       w="100%"
@@ -18,18 +33,33 @@ const JobCards = ({ shortdesc = "jo" }) => {
       cursor={"pointer"}
     >
       <Heading as="h2" size="sm" color={"blackAlpha.800"}>
-        ReactJS Developer
+        {job_title}
       </Heading>
-      <Text>Company Name</Text>
-      <Text>Job Location</Text>
+      <Text>{company_name}</Text>
+      <Text>
+        {city}, {state}
+      </Text>
+      <Tag>
+        <TagLeftIcon as={HiOutlineOfficeBuilding} />
+        <TagLabel>{is_remote == "true" ? "REMOTE" : "FULL-TIME"}</TagLabel>
+      </Tag>
+      <Tag mx={2}>
+        <TagLeftIcon as={BiCategory} />
+        <TagLabel>{category}</TagLabel>
+      </Tag>
       <Text maxH={"150px"} overflow="hidden" p={2}>
-        Build efficient, testable, and reusable PHP modules and plugins Integration of user-facing
-        elements developed by back-end developers Solve complex performance problems and
-        architectural challenges Ensure to resolve identified issues related to PHP development to
-        different customers varying from senior managers to varied technical personnel. Maintain and
-        manage clear plus complete documentation. Write all clean object-oriented PHP as well as
-        efficient SQL.
-        {/* <div dangerouslySetInnerHTML={{ __html: shortdesc }} /> */}
+        <UnorderedList listStyleType={"circle"}>
+          {jobBullets.map((item) => {
+            return (
+              <ListItem key={item} color={"#4A4A4A"}>
+                {item}
+              </ListItem>
+            );
+          })}
+        </UnorderedList>
+        {jobBullets.length < 3 ? (
+          <Box dangerouslySetInnerHTML={{ __html: html_job_description }} />
+        ) : null}
       </Text>
     </Box>
   );

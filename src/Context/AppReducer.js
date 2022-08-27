@@ -8,6 +8,8 @@ export const AppReducer = (state, action) => {
       return { ...state, what: action.payload };
     case "SET_WHERE":
       return { ...state, where: action.payload };
+    case "ADD_JOB":
+      return { ...state, jobs: [...action.payload] };
     default:
       return state;
   }

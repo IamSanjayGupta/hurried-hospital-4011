@@ -9,5 +9,9 @@ export const capitalize = function (input) {
 };
 
 export const getJobBullets = (str) => {
-  return str.slice(str.indexOf("<ul>"), str.indexOf("</ul>") + 5);
+  let text = str.slice(str.indexOf("<ul>") + 4, str.indexOf("</ul>"));
+  text = text.split("<li>");
+  text = text.join("");
+  text = text.split("</li>");
+  return text.length > 4 ? text.splice(0, 4) : text.splice(0, text.length - 1);
 };
