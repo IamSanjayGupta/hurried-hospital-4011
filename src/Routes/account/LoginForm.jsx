@@ -10,7 +10,7 @@ import {
   Text,
   VStack,
 } from "@chakra-ui/react";
-import React from "react";
+import React, { useContext } from "react";
 import logo from "../../assets/Icons/Logo.svg";
 import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import { StarIcon } from "@chakra-ui/icons";
@@ -19,16 +19,21 @@ import { FcGoogle } from "react-icons/fc";
 import { BsFacebook, BsApple } from "react-icons/bs";
 import FooterNormal from "../../components/FooterNormal";
 import { checkEmailApi } from "../../utils/api";
+import { AppContext } from "../../context/AppContext";
 
 const LoginForm = () => {
   const [email, setEmail] = React.useState("");
   let navigate = useNavigate();
+  const { state, dispatch } = useContext(AppContext);
+
+  if (state.isAuth) {
+    navigate("/");
+  }
 
   const handleForm = (e) => {
     e.preventDefault();
-    checkEmailApi({ email: email })
+    checkEmailApi({ email: email.toLowerCase() })
       .then((res) => {
-        console.log(res.data);
         if (res.data.length) {
           navigate({
             pathname: "/password",
@@ -41,7 +46,7 @@ const LoginForm = () => {
           });
         }
       })
-      .catch((err) => console.log(err))
+      .catch((err) => console.error(err))
       .finally();
   };
 

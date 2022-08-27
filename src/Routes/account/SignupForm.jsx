@@ -12,19 +12,20 @@ import {
   Text,
   VStack,
 } from "@chakra-ui/react";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import logo from "../../assets/Icons/Logo.svg";
-import { Link, useSearchParams } from "react-router-dom";
+import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import FooterNormal from "../../components/FooterNormal";
 import { sendMail } from "../../utils/mailer";
 import { VarificationTemplate } from "../../utils/email_Templates/VarificationTemplate";
-import { addTokenApi } from "../../utils/api";
+import { addTokenApi, checkEmailApi } from "../../utils/api";
 
 const SignupForm = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const email = searchParams.get("email") || null;
   if (!email) return <Navigate to={"/login"} />;
   const [isMailSent, setIsMailSent] = useState(false);
+  const navigate = useNavigate();
 
   const handleSendClick = () => {
     const token = Date.now() + email.length;
@@ -36,7 +37,7 @@ const SignupForm = () => {
       to: email,
     };
 
-    addTokenApi({ data: { email, token } })
+    addTokenApi({ data: { email: email.toLowerCase(), token } })
       .then((res) => {
         sendVarificationEmail({ emailData });
       })
@@ -53,6 +54,17 @@ const SignupForm = () => {
         console.error(err);
       });
   };
+
+  useEffect(() => {
+    checkEmailApi({ email: email.toLowerCase() })
+      .then((res) => {
+        if (res.data.length) {
+          navigate("/login");
+        }
+      })
+      .catch((err) => console.error(err))
+      .finally();
+  }, []);
 
   return (
     <>

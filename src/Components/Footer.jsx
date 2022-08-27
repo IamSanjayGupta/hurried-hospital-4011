@@ -68,7 +68,7 @@ const Footer = () => {
           </VStack>
         </Center>
       </Flex>
-      <Flex alignItems={"center"} gap={1}>
+      <Flex alignItems={"center"} flexWrap={"wrap"} gap={1}>
         <Text>© 2021 Indeed</Text>
         <BiMinus />
         <Link>Accessibility at Indeed </Link>

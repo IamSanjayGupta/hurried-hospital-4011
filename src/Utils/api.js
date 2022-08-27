@@ -12,6 +12,12 @@ export const getUsersApi = () => {
   return axios.get(`${REACT_APP_BASE_URL_API}/users`);
 };
 
+export const addUsers = ({ data }) => {
+  return axios.post(`${process.env.REACT_APP_BASE_URL_API}/users`, {
+    ...data,
+  });
+};
+
 export const checkEmailApi = ({ email }) => {
   return axios.get(`${process.env.REACT_APP_BASE_URL_API}/users?email=${email}&_limit=1`);
 };
@@ -29,6 +35,20 @@ export const addTokenApi = ({ data }) => {
   });
 };
 
+export const removeTokenApi = ({ id }) => {
+  return axios.delete(`${process.env.REACT_APP_BASE_URL_API}/pendingAccounts/${id}`);
+};
+
 export const checkTokenApi = ({ token }) => {
   return axios.get(`${process.env.REACT_APP_BASE_URL_API}/pendingAccounts?token=${token}&_limit=1`);
+};
+
+//Jobs
+
+export const getJobsApi = ({ what, where, page = 1 }) => {
+  let url = "";
+  if (where)
+    url = `${process.env.REACT_APP_BASE_URL_API}/jobs?q=${what}&city=${where}&_page=${page}&_limit=15`;
+  else url = `${process.env.REACT_APP_BASE_URL_API}/jobs?q=${what}&_page=${page}&_limit=15`;
+  return axios.get(url);
 };

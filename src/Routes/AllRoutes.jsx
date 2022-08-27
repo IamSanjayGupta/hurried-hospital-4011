@@ -5,6 +5,7 @@ import PasswordForm from "./account/PasswordForm";
 import SetPasswordForm from "./account/SetPasswordForm";
 import SignupForm from "./account/SignupForm";
 import Home from "./Home";
+import Jobs from "./Jobs";
 
 const AllRoutes = () => {
   return (
@@ -14,6 +15,7 @@ const AllRoutes = () => {
       <Route path={"/signup"} element={<SignupForm />} />
       <Route path={"/password"} element={<PasswordForm />} />
       <Route path={"/setPassword/:token"} element={<SetPasswordForm />} />
+      <Route path={"/jobs"} element={<Jobs />} />
     </Routes>
   );
 };
