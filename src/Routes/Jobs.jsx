@@ -8,9 +8,12 @@ import { getJobsApi } from "../utils/api";
 import { capitalize, getJobBullets } from "../utils/polyfills";
 import { AppContext } from "../context/AppContext";
 import JobCards from "../components/JobCards";
-import { addJob, setSelectedJob } from "../context/AppAction";
+import { addJob, setLoading, setSelectedJob } from "../context/AppAction";
+import { ApplicationTemplate } from "../utils/email_Templates/ApplicationTemplate";
+import { sendMail } from "../utils/mailer";
 const Jobs = () => {
   const { state, dispatch } = useContext(AppContext);
+  const [sendingEmail, setSendingEmail] = useState(false);
 
   let data = {
     name: "Remote",
@@ -19,6 +22,29 @@ const Jobs = () => {
 
   const selectJob = (id) => {
     dispatch(setSelectedJob({ ...state.jobs.filter((job) => job.id === id)[0] }));
+  };
+  const handleApplyBtn = () => {
+    if (!state.email) {
+      alert("Please login to apply any Job");
+      return;
+    }
+
+    const emailTemplate = ApplicationTemplate(state.selectedJob);
+    console.log(emailTemplate);
+
+    const emailData = {
+      job_title: state.selectedJob.job_title,
+      message: emailTemplate,
+      to: state.email,
+    };
+    // return;
+    setSendingEmail(true);
+    sendMail({ template: "email_application", data: emailData })
+      .then((res) => {})
+      .catch((err) => {
+        console.error(err);
+      })
+      .finally(() => setSendingEmail(false));
   };
 
   useEffect(() => {
@@ -58,7 +84,14 @@ const Jobs = () => {
               overflowY="hidden"
               boxShadow="rgba(0, 0, 0, 0.82) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px"
             >
-              <Box w={"100%"} position={"sticky"} top={1} boxShadow="md" height={"20%"} px="5">
+              <Box
+                w={"100%"}
+                position={"sticky"}
+                top={1}
+                boxShadow="md"
+                height={"fit-content"}
+                px="5"
+              >
                 <Heading as="h2" size="sm" color={"blackAlpha.800"}>
                   {state.selectedJob.job_title}
                 </Heading>
@@ -68,7 +101,15 @@ const Jobs = () => {
                 <Text fontSize="sm">
                   {state.selectedJob.city}, {state.selectedJob.state}
                 </Text>
-                <Button colorScheme="blue" bg="#2557a7" variant="solid" my="1">
+                <Button
+                  colorScheme="blue"
+                  bg="#2557a7"
+                  variant="solid"
+                  my="2"
+                  onClick={handleApplyBtn}
+                  isLoading={sendingEmail ? "YES" : ""}
+                  loadingText="Sending your application.."
+                >
                   Apply Now
                 </Button>
               </Box>
