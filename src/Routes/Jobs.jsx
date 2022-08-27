@@ -11,9 +11,11 @@ import JobCards from "../components/JobCards";
 import { addJob, setLoading, setSelectedJob } from "../context/AppAction";
 import { ApplicationTemplate } from "../utils/email_Templates/ApplicationTemplate";
 import { sendMail } from "../utils/mailer";
+import Pagination from "../components/Pagination";
 const Jobs = () => {
   const { state, dispatch } = useContext(AppContext);
   const [sendingEmail, setSendingEmail] = useState(false);
+  const [page, setPage] = useState(1);
 
   let data = {
     name: "Remote",
@@ -23,6 +25,7 @@ const Jobs = () => {
   const selectJob = (id) => {
     dispatch(setSelectedJob({ ...state.jobs.filter((job) => job.id === id)[0] }));
   };
+
   const handleApplyBtn = () => {
     if (!state.email) {
       alert("Please login to apply any Job");
@@ -49,14 +52,14 @@ const Jobs = () => {
 
   useEffect(() => {
     if (!state.what) return;
-    getJobsApi({ what: capitalize(state.what), where: capitalize(state.where) })
+    getJobsApi({ what: capitalize(state.what), where: capitalize(state.where), page: page })
       .then((res) => {
         dispatch(addJob(res.data));
         dispatch(setSelectedJob({ ...res.data[0] }));
       })
       .catch((err) => console.error(err))
       .finally();
-  }, []);
+  }, [page]);
 
   return (
     <>
@@ -95,7 +98,7 @@ const Jobs = () => {
                 <Heading as="h2" size="sm" color={"blackAlpha.800"}>
                   {state.selectedJob.job_title}
                 </Heading>
-                <Text color={"blue"} fontSize="md">
+                <Text color={"blue"} fontSize="16px">
                   {state.selectedJob.company_name}
                 </Text>
                 <Text fontSize="sm">
@@ -125,7 +128,9 @@ const Jobs = () => {
           ) : null}
         </Flex>
       </Container>
-
+      {state.jobs.length ? (
+        <Pagination page={page} setPage={setPage} disableNext={state.jobs.length < 15} />
+      ) : null}
       <FooterNormal />
     </>
   );
