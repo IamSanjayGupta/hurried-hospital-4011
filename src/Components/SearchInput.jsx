@@ -12,7 +12,7 @@ import {
 } from "@chakra-ui/react";
 import React, { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { addJob, setWhat, setWhere } from "../context/AppAction";
+import { addJob, setLoading, setWhat, setWhere } from "../context/AppAction";
 import { AppContext } from "../context/AppContext";
 import { useLocation } from "react-router-dom";
 import { getJobsApi } from "../utils/api";
@@ -23,12 +23,12 @@ const SearchInput = () => {
   const navigate = useNavigate();
   const location = useLocation();
 
-  const debouncing = (e, func, delay) => {
-    if (id) clearTimeout(id);
-    id = setTimeout(() => {
-      dispatch(func(e.target.value));
-    }, delay);
-  };
+  // const debouncing = (e, func, delay) => {
+  //   if (id) clearTimeout(id);
+  //   id = setTimeout(() => {
+  //     dispatch(func(e.target.value));
+  //   }, delay);
+  // };
 
   const handleForm = (e) => {
     e.preventDefault();
@@ -36,14 +36,15 @@ const SearchInput = () => {
     if (location.pathname === "/") {
       navigate("/jobs");
     } else {
+      dispatch(setLoading(true));
+
       if (!state.what) return;
-      console.log("Hi");
       getJobsApi({ what: capitalize(state.what), where: capitalize(state.where) })
         .then((res) => {
           dispatch(addJob(res.data));
         })
         .catch((err) => console.error(err))
-        .finally();
+        .finally(() => dispatch(setLoading(false)));
     }
   };
 
@@ -67,8 +68,9 @@ const SearchInput = () => {
               placeholder="Job title, keywords or company"
               pl="75px"
               type={"search"}
-              onChange={(e) => debouncing(e, setWhat, 500)}
+              onChange={(e) => dispatch(setWhat(e.target.value))}
               required
+              value={state.what}
             />
             <InputRightElement children={<SearchIcon color="gray.500" />} zIndex={-1} />
           </InputGroup>
@@ -83,7 +85,8 @@ const SearchInput = () => {
               placeholder="City, State or pin code"
               pl="75px"
               type={"search"}
-              onChange={(e) => debouncing(e, setWhere, 500)}
+              onChange={(e) => dispatch(setWhere(e.target.value))}
+              value={state.where}
             />
             <InputRightElement children={<IoLocationOutline color="gray.500" />} zIndex={-1} />
           </InputGroup>
@@ -95,6 +98,8 @@ const SearchInput = () => {
             _focus={{
               boxShadow: "0 0 0 2px #fff, 0 0 0 4px #085ff7",
             }}
+            isLoading={state.isLoading ? "YES" : ""}
+            loadingText="Finding Jobs"
           >
             Find Jobs
           </Button>

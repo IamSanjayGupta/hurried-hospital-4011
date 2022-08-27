@@ -18,6 +18,6 @@ export const addJob = (value) => {
   return { type: "ADD_JOB", payload: value };
 };
 
-// export const setAuth = (value) => {
-//   return { type: "LOGIN_SUCCESS", payload: value };
-// };
+export const setLoading = (value) => {
+  return { type: "SET_LOADING", payload: value };
+};

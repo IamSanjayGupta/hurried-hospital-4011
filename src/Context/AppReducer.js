@@ -1,3 +1,5 @@
+import { BiPlay } from "react-icons/bi";
+
 export const AppReducer = (state, action) => {
   switch (action.type) {
     case "SET_AUTH":
@@ -10,6 +12,9 @@ export const AppReducer = (state, action) => {
       return { ...state, where: action.payload };
     case "ADD_JOB":
       return { ...state, jobs: [...action.payload] };
+    case "SET_LOADING":
+      return { ...state, isLoading: action.payload };
+
     default:
       return state;
   }
