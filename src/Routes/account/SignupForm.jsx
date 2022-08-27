@@ -45,7 +45,7 @@ const SignupForm = () => {
         sendVarificationEmail({ emailData });
       })
       .catch((err) => console.error(err))
-      .finally(() => dispatch(setLoading(false)));
+      .finally();
   };
 
   const sendVarificationEmail = ({ emailData }) => {
@@ -55,7 +55,8 @@ const SignupForm = () => {
       })
       .catch((err) => {
         console.error(err);
-      });
+      })
+      .finally(() => dispatch(setLoading(false)));
   };
 
   useEffect(() => {

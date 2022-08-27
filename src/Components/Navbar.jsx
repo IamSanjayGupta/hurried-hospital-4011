@@ -29,6 +29,7 @@ import { FaUserAlt, FaBell } from "react-icons/fa";
 import { ImProfile, ImHeart, ImCogs, ImMail } from "react-icons/im";
 import { AppContext } from "../context/AppContext";
 import { setAuth, setEmail } from "../context/AppAction";
+import { capitalize } from "../utils/polyfills";
 const Links = [
   { path: "/jobs", name: "Find Jobs" },
   { path: "/companyReviews", name: "Company reviews" },
@@ -130,7 +131,7 @@ const Navbar = () => {
                   <FaUserAlt />
                 </MenuButton>
                 <MenuList mt={-2}>
-                  <MenuGroup title={state.email}>
+                  <MenuGroup title={capitalize(state.email)}>
                     <MenuItem icon={<ImProfile />}>Profile</MenuItem>
                     <MenuItem icon={<ImHeart />}>My Jobs</MenuItem>
                     <MenuItem icon={<MdReviews />}>My reviews</MenuItem>
@@ -165,7 +166,7 @@ const Navbar = () => {
                   <FaUserAlt />
                 </MenuButton>
                 <MenuList mt={-2}>
-                  <MenuGroup title={state.email}>
+                  <MenuGroup title={capitalize(state.email)}>
                     <MenuItem icon={<ImProfile />}>Profile</MenuItem>
                     <MenuItem icon={<ImHeart />}>My Jobs</MenuItem>
                     <MenuItem icon={<MdReviews />}>My reviews</MenuItem>
