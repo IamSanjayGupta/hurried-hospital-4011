@@ -12,12 +12,16 @@ import {
 } from "@chakra-ui/react";
 import React, { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { setWhat, setWhere } from "../context/AppAction";
+import { addJob, setWhat, setWhere } from "../context/AppAction";
 import { AppContext } from "../context/AppContext";
+import { useLocation } from "react-router-dom";
+import { getJobsApi } from "../utils/api";
+import { capitalize } from "../utils/polyfills";
 let id = 0;
 const SearchInput = () => {
   const { state, dispatch } = useContext(AppContext);
   const navigate = useNavigate();
+  const location = useLocation();
 
   const debouncing = (e, func, delay) => {
     if (id) clearTimeout(id);
@@ -26,9 +30,26 @@ const SearchInput = () => {
     }, delay);
   };
 
+  const handleForm = (e) => {
+    e.preventDefault();
+
+    if (location.pathname === "/") {
+      navigate("/jobs");
+    } else {
+      if (!state.what) return;
+      console.log("Hi");
+      getJobsApi({ what: capitalize(state.what), where: capitalize(state.where) })
+        .then((res) => {
+          dispatch(addJob(res.data));
+        })
+        .catch((err) => console.error(err))
+        .finally();
+    }
+  };
+
   return (
     <Container maxW={"container.lg"}>
-      <form onSubmit={(e) => e.preventDefault()}>
+      <form onSubmit={handleForm}>
         <Flex
           my={10}
           justifyContent={"center"}
@@ -46,7 +67,7 @@ const SearchInput = () => {
               placeholder="Job title, keywords or company"
               pl="75px"
               type={"search"}
-              onChange={(e) => debouncing(e, setWhat, 1000)}
+              onChange={(e) => debouncing(e, setWhat, 500)}
               required
             />
             <InputRightElement children={<SearchIcon color="gray.500" />} zIndex={-1} />
@@ -62,7 +83,7 @@ const SearchInput = () => {
               placeholder="City, State or pin code"
               pl="75px"
               type={"search"}
-              onChange={(e) => debouncing(e, setWhere, 1000)}
+              onChange={(e) => debouncing(e, setWhere, 500)}
             />
             <InputRightElement children={<IoLocationOutline color="gray.500" />} zIndex={-1} />
           </InputGroup>
@@ -74,7 +95,6 @@ const SearchInput = () => {
             _focus={{
               boxShadow: "0 0 0 2px #fff, 0 0 0 4px #085ff7",
             }}
-            onClick={() => navigate("/jobs")}
           >
             Find Jobs
           </Button>

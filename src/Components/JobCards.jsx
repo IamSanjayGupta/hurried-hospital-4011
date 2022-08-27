@@ -47,7 +47,7 @@ const JobCards = ({ props }) => {
         <TagLeftIcon as={BiCategory} />
         <TagLabel>{category}</TagLabel>
       </Tag>
-      <Text maxH={"150px"} overflow="hidden" p={2}>
+      <Box maxH={"150px"} overflow="hidden" p={2}>
         <UnorderedList listStyleType={"circle"}>
           {jobBullets.map((item) => {
             return (
@@ -60,7 +60,7 @@ const JobCards = ({ props }) => {
         {jobBullets.length < 3 ? (
           <Box dangerouslySetInnerHTML={{ __html: html_job_description }} />
         ) : null}
-      </Text>
+      </Box>
     </Box>
   );
 };

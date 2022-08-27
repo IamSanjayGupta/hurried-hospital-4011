@@ -17,18 +17,15 @@ const Jobs = () => {
     childs: ["YES", "NO"],
   };
 
-  console.log(state.jobs);
   useEffect(() => {
     if (!state.what) return;
-
     getJobsApi({ what: capitalize(state.what), where: capitalize(state.where) })
       .then((res) => {
-        console.log(res.data);
         dispatch(addJob(res.data));
       })
       .catch((err) => console.error(err))
       .finally();
-  }, [state.what, state.where]);
+  }, []);
 
   return (
     <>
