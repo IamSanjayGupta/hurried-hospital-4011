@@ -12,7 +12,7 @@ import {
 } from "@chakra-ui/react";
 import React, { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { addJob, setLoading, setWhat, setWhere } from "../context/AppAction";
+import { addJob, setLoading, setSelectedJob, setWhat, setWhere } from "../context/AppAction";
 import { AppContext } from "../context/AppContext";
 import { useLocation } from "react-router-dom";
 import { getJobsApi } from "../utils/api";
@@ -42,6 +42,7 @@ const SearchInput = () => {
       getJobsApi({ what: capitalize(state.what), where: capitalize(state.where) })
         .then((res) => {
           dispatch(addJob(res.data));
+          dispatch(setSelectedJob({ ...res.data[0] }));
         })
         .catch((err) => console.error(err))
         .finally(() => dispatch(setLoading(false)));

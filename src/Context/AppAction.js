@@ -21,3 +21,7 @@ export const addJob = (value) => {
 export const setLoading = (value) => {
   return { type: "SET_LOADING", payload: value };
 };
+
+export const setSelectedJob = (value) => {
+  return { type: "SET_SELECTED_JOB", payload: value };
+};

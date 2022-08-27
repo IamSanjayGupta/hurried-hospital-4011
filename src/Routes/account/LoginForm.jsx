@@ -20,6 +20,7 @@ import { BsFacebook, BsApple } from "react-icons/bs";
 import FooterNormal from "../../components/FooterNormal";
 import { checkEmailApi } from "../../utils/api";
 import { AppContext } from "../../context/AppContext";
+import { setLoading } from "../../context/AppAction";
 
 const LoginForm = () => {
   const [email, setEmail] = React.useState("");
@@ -32,6 +33,7 @@ const LoginForm = () => {
 
   const handleForm = (e) => {
     e.preventDefault();
+    dispatch(setLoading(true));
     checkEmailApi({ email: email.toLowerCase() })
       .then((res) => {
         if (res.data.length) {
@@ -47,7 +49,7 @@ const LoginForm = () => {
         }
       })
       .catch((err) => console.error(err))
-      .finally();
+      .finally(() => dispatch(setLoading(false)));
   };
 
   return (
@@ -132,6 +134,8 @@ const LoginForm = () => {
               colorScheme="facebook"
               fontWeight={"bold"}
               rightIcon={<ImArrowRight2 />}
+              isLoading={state.isLoading ? "YES" : ""}
+              loadingText="Verifying Email address"
             >
               Continue
             </Button>

@@ -14,6 +14,8 @@ export const AppReducer = (state, action) => {
       return { ...state, jobs: [...action.payload] };
     case "SET_LOADING":
       return { ...state, isLoading: action.payload };
+    case "SET_SELECTED_JOB":
+      return { ...state, selectedJob: action.payload };
 
     default:
       return state;

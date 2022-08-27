@@ -9,6 +9,7 @@ const initState = {
   what: "",
   where: "",
   jobs: [],
+  selectedJob: {},
 };
 
 export const AppContext = createContext();
