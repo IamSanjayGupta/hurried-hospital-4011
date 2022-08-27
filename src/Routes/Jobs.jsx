@@ -51,6 +51,7 @@ const Jobs = () => {
   };
 
   useEffect(() => {
+    dispatch(setLoading(true));
     if (!state.what) return;
     getJobsApi({ what: capitalize(state.what), where: capitalize(state.where), page: page })
       .then((res) => {
@@ -58,7 +59,7 @@ const Jobs = () => {
         dispatch(setSelectedJob({ ...res.data[0] }));
       })
       .catch((err) => console.error(err))
-      .finally();
+      .finally(() => dispatch(setLoading(false)));
   }, [page]);
 
   return (

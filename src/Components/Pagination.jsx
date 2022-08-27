@@ -5,13 +5,14 @@ import { AppContext } from "../context/AppContext";
 
 const Pagination = ({ page, setPage, disableNext }) => {
   const { state } = useContext(AppContext);
+
   return (
     <div>
       <Container maxW={"container.lg"} my="5">
         <IconButton
           icon={<ChevronLeftIcon />}
           onClick={() => setPage(page - 1)}
-          disabled={page === 1}
+          disabled={page === 1 || state.isLoading}
           isLoading={state.isLoading ? "YES" : ""}
         />
         <Button colorScheme="blue" size="md" mx={2}>
@@ -20,7 +21,7 @@ const Pagination = ({ page, setPage, disableNext }) => {
         <IconButton
           icon={<ChevronRightIcon />}
           onClick={() => setPage(page + 1)}
-          disabled={disableNext}
+          disabled={disableNext || state.isLoading}
           isLoading={state.isLoading ? "YES" : ""}
         />
       </Container>
