@@ -28,7 +28,7 @@ const SignupForm = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const navigate = useNavigate();
   const email = searchParams.get("email") || null;
-  if (!email) return <Navigate to={"/login"} />;
+  // if (!email) return <Navigate to={"/login"} />;
 
   const handleSendClick = () => {
     const token = Date.now() + email.length;
@@ -59,16 +59,18 @@ const SignupForm = () => {
       .finally(() => dispatch(setLoading(false)));
   };
 
-  // useEffect(() => {
-  //   checkEmailApi({ email: email.toLowerCase() })
-  //     .then((res) => {
-  //       if (res.data.length) {
-  //         navigate("/login");
-  //       }
-  //     })
-  //     .catch((err) => console.error(err))
-  //     .finally(()=>{});
-  // }, []);
+  useEffect(() => {
+    checkEmailApi({ email: email.toLowerCase() })
+      .then((res) => {
+        if (res.data.length) {
+          navigate("/login");
+        }
+      })
+      .catch((err) => console.error(err))
+      .finally(() => {});
+  }, []);
+
+  if (!email) return <Navigate to={"/login"} />;
 
   return (
     <>
