@@ -4,7 +4,7 @@ import { AppContext } from "../context/AppContext";
 
 const PrivateRoute = ({ children }) => {
   const { state, dispatch } = useContext(AppContext);
-  if (!state.inAuth) {
+  if (!state.isAuth) {
     return <Navigate to="/" />;
   }
   return children;

@@ -6,7 +6,7 @@ import { setWhat } from "../context/AppAction";
 import { AppContext } from "../context/AppContext";
 
 let tags = [
-  "Software Developer Fresher",
+  "Java Developer",
   "Work From Home",
   "Driver",
   "HR Fresher",

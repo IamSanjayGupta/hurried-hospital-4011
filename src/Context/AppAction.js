@@ -25,3 +25,15 @@ export const setLoading = (value) => {
 export const setSelectedJob = (value) => {
   return { type: "SET_SELECTED_JOB", payload: value };
 };
+
+export const setRemote = (value) => {
+  return { type: "SET_REMOTE", payload: value };
+};
+
+export const setdatePosted = (value) => {
+  return { type: "SET_DATE_POSTED", payload: value };
+};
+
+export const setJobType = (value) => {
+  return { type: "SET_JOB_TYPE", payload: value };
+};

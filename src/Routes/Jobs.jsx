@@ -3,7 +3,17 @@ import Navbar from "../components/Navbar";
 import SearchInput from "../components/SearchInput";
 import FooterNormal from "../components/FooterNormal";
 import FilterButton from "../components/FilterButton";
-import { Box, Button, Container, Divider, Flex, Heading, Text, VStack } from "@chakra-ui/react";
+import {
+  Box,
+  Button,
+  Container,
+  Divider,
+  Flex,
+  Heading,
+  HStack,
+  Text,
+  VStack,
+} from "@chakra-ui/react";
 import { getJobsApi } from "../utils/api";
 import { capitalize, getJobBullets } from "../utils/polyfills";
 import { AppContext } from "../context/AppContext";
@@ -17,10 +27,23 @@ const Jobs = () => {
   const [sendingEmail, setSendingEmail] = useState(false);
   const [page, setPage] = useState(1);
 
-  let data = {
-    name: "Remote",
-    childs: ["YES", "NO"],
-  };
+  let filterBtn = [
+    // {
+    //   name: "Date Posted",
+    //   childs: ["Last 24 Hours", "Last 3 days", "Last 7 days", "Last 14 days"],
+    // },
+    // {
+    //   name: "Job Type",
+    //   childs: ["Full-time", "Part-time", "Contract", "Fresher", "Internship"],
+    // },
+    {
+      name: "Remote",
+      childs: [
+        { key: "&is_remote=true", name: "YES" },
+        { key: "&is_remote=false", name: "NO" },
+      ],
+    },
+  ];
 
   const selectJob = (id) => {
     dispatch(setSelectedJob({ ...state.jobs.filter((job) => job.id === id)[0] }));
@@ -51,8 +74,8 @@ const Jobs = () => {
   };
 
   useEffect(() => {
-    dispatch(setLoading(true));
     if (!state.what) return;
+    dispatch(setLoading(true));
     getJobsApi({ what: capitalize(state.what), where: capitalize(state.where), page: page })
       .then((res) => {
         dispatch(addJob(res.data));
@@ -67,7 +90,9 @@ const Jobs = () => {
       <Navbar />
       <SearchInput />
       <Container maxW={"container.lg"}>
-        <FilterButton data={data} />
+        {filterBtn.map((btn, i) => {
+          return <FilterButton key={i} data={btn} />;
+        })}
       </Container>
       <Divider bg={"gray.300"} my="5" />
       <Container maxW={"container.lg"} position="relative">

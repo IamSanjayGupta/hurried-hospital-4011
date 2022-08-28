@@ -136,7 +136,9 @@ const Navbar = () => {
                     <MenuItem icon={<ImHeart />}>My Jobs</MenuItem>
                     <MenuItem icon={<MdReviews />}>My reviews</MenuItem>
                     <MenuItem icon={<ImMail />}>Email Settings</MenuItem>
-                    <MenuItem icon={<ImCogs />}>Settings</MenuItem>
+                    <MenuItem icon={<ImCogs />} onClick={() => navigate("/settings")}>
+                      Settings
+                    </MenuItem>
                     <MenuItem icon={<MdHelp />}>Help Center</MenuItem>
                     <MenuDivider />
                     <MenuItem onClick={() => signOut()}>Sign out</MenuItem>
@@ -171,7 +173,9 @@ const Navbar = () => {
                     <MenuItem icon={<ImHeart />}>My Jobs</MenuItem>
                     <MenuItem icon={<MdReviews />}>My reviews</MenuItem>
                     <MenuItem icon={<ImMail />}>Email Settings</MenuItem>
-                    <MenuItem icon={<ImCogs />}>Settings</MenuItem>
+                    <MenuItem icon={<ImCogs />} onClick={() => navigate("/settings")}>
+                      Settings
+                    </MenuItem>
                     <MenuItem icon={<MdHelp />}>Help Center</MenuItem>
                     <MenuDivider />
                     <MenuItem onClick={() => signOut()}>Sign out</MenuItem>

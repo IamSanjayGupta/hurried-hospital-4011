@@ -45,10 +45,18 @@ export const checkTokenApi = ({ token }) => {
 
 //Jobs
 
-export const getJobsApi = ({ what, where, page = 1 }) => {
-  let url = "";
-  if (where)
-    url = `${process.env.REACT_APP_BASE_URL_API}/jobs?q=${what}&city=${where}&_page=${page}&_limit=15`;
-  else url = `${process.env.REACT_APP_BASE_URL_API}/jobs?q=${what}&_page=${page}&_limit=15`;
+export const getJobsApi = ({ what, where, page = 1, filter }) => {
+  let query = `?q=${what}`;
+
+  if (where) query += `&city=${where}`;
+  if (filter) query += `${filter}`;
+  query += `&_page=${page}&_limit=15`;
+
+  let url = `${process.env.REACT_APP_BASE_URL_API}/jobs${query}`;
+  console.log(url);
   return axios.get(url);
 };
+
+// if (where)
+//   url = `${process.env.REACT_APP_BASE_URL_API}/jobs?q=${what}&city=${where}&_page=${page}&_limit=15`;
+// else url =

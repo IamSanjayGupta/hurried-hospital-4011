@@ -16,7 +16,12 @@ export const AppReducer = (state, action) => {
       return { ...state, isLoading: action.payload };
     case "SET_SELECTED_JOB":
       return { ...state, selectedJob: action.payload };
-
+    case "SET_REMOTE":
+      return { ...state, remote: action.payload };
+    case "SET_DATE_POSTED":
+      return { ...state, datePosted: action.payload };
+    case "SET_JOB_TYPE":
+      return { ...state, jobType: action.payload };
     default:
       return state;
   }

@@ -36,9 +36,8 @@ const SearchInput = () => {
     if (location.pathname === "/") {
       navigate("/jobs");
     } else {
-      dispatch(setLoading(true));
-
       if (!state.what) return;
+      dispatch(setLoading(true));
       getJobsApi({ what: capitalize(state.what), where: capitalize(state.where) })
         .then((res) => {
           dispatch(addJob(res.data));
@@ -71,7 +70,6 @@ const SearchInput = () => {
               type={"search"}
               onChange={(e) => dispatch(setWhat(e.target.value))}
               required
-              value={state.what}
             />
             <InputRightElement children={<SearchIcon color="gray.500" />} zIndex={-1} />
           </InputGroup>
@@ -99,7 +97,7 @@ const SearchInput = () => {
             _focus={{
               boxShadow: "0 0 0 2px #fff, 0 0 0 4px #085ff7",
             }}
-            isLoading={state.isLoading || location.pathname !== "/" ? "YES" : ""}
+            isLoading={state.isLoading ? "YES" : ""}
             loadingText="Finding Jobs"
           >
             Find Jobs
