@@ -20,6 +20,13 @@ const FilterButton = ({ data }) => {
   const { state, dispatch } = useContext(AppContext);
   const [flag, setflag] = useState(false);
 
+  Date.prototype.addDays = function (days) {
+    const date = new Date(this.valueOf());
+    date.setDate(date.getDate() + days);
+    return date;
+  };
+  console.log(new Date().addDays(5).toISOString().slice(0, 10));
+
   const handleItemClick = (name, key) => {
     if (name === "Remote") {
       dispatch(setRemote(key));

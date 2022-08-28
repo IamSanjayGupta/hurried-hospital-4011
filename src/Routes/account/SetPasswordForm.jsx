@@ -53,9 +53,7 @@ const SetPasswordForm = () => {
     addUsers({ data })
       .then((res) => {
         removeTokenApi({ id }).then((res) => {
-          dispatch(setAuth(true));
-          dispatch(setEmail(email));
-          navigate("/");
+          navigate("/login");
         });
       })
       .catch((err) => console.error(err))

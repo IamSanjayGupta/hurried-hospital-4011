@@ -45,6 +45,5 @@ export const getJobsApi = ({ what, where, page = 1, filter }) => {
 };
 
 export const deleteAccountApi = ({ id }) => {
-  console.log(id, `${process.env.REACT_APP_BASE_URL_API}/users/${id}`);
   return axios.delete(`${process.env.REACT_APP_BASE_URL_API}/users/${id}`);
 };

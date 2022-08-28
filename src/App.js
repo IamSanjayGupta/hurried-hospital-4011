@@ -13,9 +13,6 @@ import AllRoutes from "./routes/AllRoutes";
 import { decrypt, ecrypt } from "./utils/ecryptDecrypt";
 
 function App() {
-  // const data = { body: "THIS IS G", to: "sanjayg.8237@gmail.com" };
-  // console.log(sendMail({ template: "email_varification", data }));
-
   return (
     <div className="App">
       <AllRoutes />
