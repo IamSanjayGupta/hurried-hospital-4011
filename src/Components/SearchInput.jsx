@@ -99,7 +99,7 @@ const SearchInput = () => {
             _focus={{
               boxShadow: "0 0 0 2px #fff, 0 0 0 4px #085ff7",
             }}
-            isLoading={state.isLoading ? "YES" : ""}
+            isLoading={state.isLoading || location.pathname !== "/" ? "YES" : ""}
             loadingText="Finding Jobs"
           >
             Find Jobs

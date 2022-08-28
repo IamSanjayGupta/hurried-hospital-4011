@@ -1,11 +1,13 @@
 import React from "react";
 import { Route, Routes } from "react-router-dom";
+import PrivateRoute from "../components/PrivateRoute";
 import LoginForm from "./account/LoginForm";
 import PasswordForm from "./account/PasswordForm";
 import SetPasswordForm from "./account/SetPasswordForm";
 import SignupForm from "./account/SignupForm";
 import Home from "./Home";
 import Jobs from "./Jobs";
+import Settings from "./Settings";
 
 const AllRoutes = () => {
   return (
@@ -16,6 +18,14 @@ const AllRoutes = () => {
       <Route path={"/password"} element={<PasswordForm />} />
       <Route path={"/setPassword/:token"} element={<SetPasswordForm />} />
       <Route path={"/jobs"} element={<Jobs />} />
+      <Route
+        path={"/settings"}
+        element={
+          <PrivateRoute>
+            <Settings />
+          </PrivateRoute>
+        }
+      />
     </Routes>
   );
 };
