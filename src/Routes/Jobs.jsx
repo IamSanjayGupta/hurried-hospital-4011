@@ -28,14 +28,25 @@ const Jobs = () => {
   const [page, setPage] = useState(1);
 
   let filterBtn = [
-    // {
-    //   name: "Date Posted",
-    //   childs: ["Last 24 Hours", "Last 3 days", "Last 7 days", "Last 14 days"],
-    // },
-    // {
-    //   name: "Job Type",
-    //   childs: ["Full-time", "Part-time", "Contract", "Fresher", "Internship"],
-    // },
+    {
+      name: "Date Posted",
+      childs: [
+        { key: "a", name: "Last 24 Hours" },
+        { key: "a", name: "Last 3 days" },
+        { key: "a", name: "Last 7 days" },
+        { key: "a", name: "Last 14 days" },
+      ],
+    },
+    {
+      name: "Job Type",
+      childs: [
+        { key: "&job_type=Full-time", name: "Full-time" },
+        { key: "&job_type=Part-time", name: "Part-time" },
+        { key: "&job_type=Contract", name: "Contract" },
+        { key: "&job_type=Fresher", name: "Fresher" },
+        { key: "&job_type=Internship", name: "Internship" },
+      ],
+    },
     {
       name: "Remote",
       childs: [

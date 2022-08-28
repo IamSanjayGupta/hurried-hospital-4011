@@ -47,7 +47,7 @@ export const checkTokenApi = ({ token }) => {
 
 export const getJobsApi = ({ what, where, page = 1, filter }) => {
   let query = `?q=${what}`;
-
+  console.log(filter);
   if (where) query += `&city=${where}`;
   if (filter) query += `${filter}`;
   query += `&_page=${page}&_limit=15`;

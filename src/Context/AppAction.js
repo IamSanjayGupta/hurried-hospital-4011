@@ -30,7 +30,7 @@ export const setRemote = (value) => {
   return { type: "SET_REMOTE", payload: value };
 };
 
-export const setdatePosted = (value) => {
+export const setDatePosted = (value) => {
   return { type: "SET_DATE_POSTED", payload: value };
 };
 
