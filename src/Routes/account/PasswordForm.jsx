@@ -28,9 +28,9 @@ const PasswordForm = () => {
   const [password, setPassword] = useState("");
   const [searchParams, setSearchParams] = useSearchParams();
   const { state, dispatch } = useContext(AppContext);
+  const navigate = useNavigate();
   const email = searchParams.get("email") || null;
   if (!email) return <Navigate to={"/login"} />;
-  const navigate = useNavigate();
 
   if (accountErr) setTimeout(() => setAccountErr(false), 4000);
 

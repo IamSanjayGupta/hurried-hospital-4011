@@ -1,7 +1,7 @@
 import axios from "axios";
 
 export const getUsersApi = () => {
-  return axios.get(`${REACT_APP_BASE_URL_API}/users`);
+  return axios.get(`${process.env.REACT_APP_BASE_URL_API}/users`);
 };
 
 export const addUsers = ({ data }) => {

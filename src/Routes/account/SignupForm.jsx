@@ -1,3 +1,4 @@
+import React, { useContext, useEffect, useState } from "react";
 import {
   Alert,
   AlertDescription,
@@ -12,7 +13,6 @@ import {
   Text,
   VStack,
 } from "@chakra-ui/react";
-import React, { useContext, useEffect, useState } from "react";
 import logo from "../../assets/Icons/Logo.svg";
 import { Link, Navigate, useNavigate, useSearchParams } from "react-router-dom";
 import FooterNormal from "../../components/FooterNormal";
@@ -59,16 +59,16 @@ const SignupForm = () => {
       .finally(() => dispatch(setLoading(false)));
   };
 
-  useEffect(() => {
-    checkEmailApi({ email: email.toLowerCase() })
-      .then((res) => {
-        if (res.data.length) {
-          navigate("/login");
-        }
-      })
-      .catch((err) => console.error(err))
-      .finally();
-  }, []);
+  // useEffect(() => {
+  //   checkEmailApi({ email: email.toLowerCase() })
+  //     .then((res) => {
+  //       if (res.data.length) {
+  //         navigate("/login");
+  //       }
+  //     })
+  //     .catch((err) => console.error(err))
+  //     .finally();
+  // }, []);
 
   return (
     <>
