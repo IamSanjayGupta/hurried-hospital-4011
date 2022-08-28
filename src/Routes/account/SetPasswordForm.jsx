@@ -22,7 +22,7 @@ import { StarIcon } from "@chakra-ui/icons";
 import FooterNormal from "../../components/FooterNormal";
 import { addUsers, checkTokenApi, removeTokenApi } from "../../utils/api";
 import { ecrypt } from "../../utils/ecryptDecrypt";
-import { setLoading } from "../../context/AppAction";
+import { setAuth, setLoading } from "../../context/AppAction";
 import { AppContext } from "../../context/AppContext";
 
 const SetPasswordForm = () => {
@@ -53,7 +53,9 @@ const SetPasswordForm = () => {
     addUsers({ data })
       .then((res) => {
         removeTokenApi({ id }).then((res) => {
-          navigate("/login");
+          dispatch(setAuth(true));
+          dispatch(setEmail(email));
+          navigate("/");
         });
       })
       .catch((err) => console.error(err))
