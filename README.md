@@ -1,33 +1,33 @@
 # hurried-hospital-4011
 
 https://indeed-eight.vercel.app/
-
- #  Indeed CLONE (hurried-hospital-4011)
+#  Indeed CLONE (hurried-hospital-4011)
  
  ## Description
- Indeed is an American worldwide employment website for job listings launched in November 2004
+ Indeed is an  worldwide employment website for job listings. With Indeed, you can search millions of jobs online to find the next step in your career. With tools for job search, resumes, company reviews and more
    
- ## Language 💻
-- HTML
-- CSS
-- JavaScript
+ ## Tools 💻
+- React JavaScript library
+- Chakra UI 
+- Email JS, CryptoJS, ...
 
-(No External Library Used)
+
 
 ## Features ✨
 
 - Authentication process with API.
-- Cool multilevel Navigation bar.
-- Store Option availble to buy products
-- Cool CSS over pages of website
-- Address, Payement and Checkout feature done with LocalStorage.
+- Passwords are stored in encryted format with advance AES encrytion technology.
+- Cool Navigation bar and Footer.
+- Option to search the Job
+- Search by populer search tags
+- Option to apply filter on search job
+- Option to delete account from settings
+- Responsive website for mobile devices
 
 ## Link 
-https://lucky-brigadeiros-3ea877.netlify.app
+https://indeed-eight.vercel.app/
 
-## Contributors  😇
+## Contributor  😇
 
 - 👤 [Sanjay Gupta](https://github.com/IamSanjayGupta)
-- 👤 [Rohit Sawant](https://github.com/RohitSawant0351)
-- 👤 [Vishal Kumar](https://github.com/vishal6566)
-- 👤 [Vivek Kumar](https://github.com/vkumar909)
+
