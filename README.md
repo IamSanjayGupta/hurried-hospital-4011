@@ -1,6 +1,4 @@
-# hurried-hospital-4011
 
-https://indeed-eight.vercel.app/
 #  Indeed CLONE (hurried-hospital-4011)
  
  ## Description
@@ -10,8 +8,6 @@ https://indeed-eight.vercel.app/
 - React JavaScript library
 - Chakra UI 
 - Email JS, CryptoJS, ...
-
-
 
 ## Features ✨
 
