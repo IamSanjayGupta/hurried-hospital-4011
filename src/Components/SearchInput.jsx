@@ -69,6 +69,7 @@ const SearchInput = () => {
               pl="75px"
               type={"search"}
               onChange={(e) => dispatch(setWhat(e.target.value))}
+              value={state.what}
               required
             />
             <InputRightElement children={<SearchIcon color="gray.500" />} zIndex={-1} />

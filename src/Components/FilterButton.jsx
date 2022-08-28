@@ -34,9 +34,8 @@ const FilterButton = ({ data }) => {
     // console.log(state.what);
   };
   useEffect(() => {
-    console.log("Hello");
+    console.log("Filter UseEffet");
     if (flag) {
-      console.log("Sanjay");
       dispatch(setLoading(true));
       getJobsApi({
         what: capitalize(state.what),

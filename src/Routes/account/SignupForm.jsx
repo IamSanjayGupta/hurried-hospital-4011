@@ -14,7 +14,7 @@ import {
 } from "@chakra-ui/react";
 import React, { useContext, useEffect, useState } from "react";
 import logo from "../../assets/Icons/Logo.svg";
-import { Link, useNavigate, useSearchParams } from "react-router-dom";
+import { Link, Navigate, useNavigate, useSearchParams } from "react-router-dom";
 import FooterNormal from "../../components/FooterNormal";
 import { sendMail } from "../../utils/mailer";
 import { VarificationTemplate } from "../../utils/email_Templates/VarificationTemplate";
@@ -23,12 +23,12 @@ import { setLoading } from "../../context/AppAction";
 import { AppContext } from "../../context/AppContext";
 
 const SignupForm = () => {
+  const [isMailSent, setIsMailSent] = useState(false);
+  const { state, dispatch } = useContext(AppContext);
+  const navigate = useNavigate();
   const [searchParams, setSearchParams] = useSearchParams();
   const email = searchParams.get("email") || null;
   if (!email) return <Navigate to={"/login"} />;
-  const [isMailSent, setIsMailSent] = useState(false);
-  const navigate = useNavigate();
-  const { state, dispatch } = useContext(AppContext);
 
   const handleSendClick = () => {
     const token = Date.now() + email.length;
