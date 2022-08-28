@@ -67,8 +67,6 @@ const Jobs = () => {
     }
 
     const emailTemplate = ApplicationTemplate(state.selectedJob);
-    console.log(emailTemplate);
-
     const emailData = {
       job_title: state.selectedJob.job_title,
       message: emailTemplate,

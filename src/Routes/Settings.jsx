@@ -25,7 +25,7 @@ import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
 import { setAuth, setEmail, setLoading } from "../context/AppAction";
 import { AppContext } from "../context/AppContext";
-import { checkEmailApi } from "../utils/api";
+import { checkEmailApi, deleteAccountApi } from "../utils/api";
 
 const Settings = () => {
   const { state, dispatch } = useContext(AppContext);
@@ -37,7 +37,21 @@ const Settings = () => {
     dispatch(setEmail(""));
   };
 
-  const deleteAccount = () => [];
+  const deleteAccount = () => {
+    dispatch(setLoading(true));
+    checkEmailApi({ email: state.email.toLowerCase() })
+      .then((res) => {
+        deleteAccountApi({ id: res.data[0].id })
+          .then((res) => {
+            dispatch(setAuth(false));
+            dispatch(setEmail(""));
+          })
+          .catch((err) => console.error(err))
+          .finally(() => dispatch(setLoading(false)));
+      })
+      .catch((err) => console.error(err))
+      .finally();
+  };
 
   useEffect(() => {
     dispatch(setLoading(true));
@@ -142,7 +156,7 @@ const Settings = () => {
               </HStack>
               <Divider />
               <HStack justifyContent={"space-between"} w="100%" my="2">
-                <Heading size="md">Sanjay.g.258@gmail.com</Heading>
+                <Heading size="md">{data.email}</Heading>
                 <Button size="md" colorScheme="blue" variant="outline" onClick={() => signOut()}>
                   Sign Out
                 </Button>
@@ -172,7 +186,13 @@ const Settings = () => {
                 so that you receive all emails from Indeed.
               </Text>
               <HStack justifyContent={"space-evenly"}>
-                <Button colorScheme={"red"} my="2" onClick={deleteAccount}>
+                <Button
+                  colorScheme={"red"}
+                  my="2"
+                  onClick={deleteAccount}
+                  isLoading={state.isLoading ? "YES" : ""}
+                  loadingText="Deleting your account..."
+                >
                   Yes. Close my account
                 </Button>
                 <Button onClick={onClose} px="10" colorScheme={"blue"}>

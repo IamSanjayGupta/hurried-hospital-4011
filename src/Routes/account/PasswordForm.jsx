@@ -26,8 +26,8 @@ import { setAuth, setEmail, setLoading } from "../../context/AppAction";
 const PasswordForm = () => {
   const [accountErr, setAccountErr] = useState(false);
   const [password, setPassword] = useState("");
-  const { state, dispatch } = useContext(AppContext);
   const [searchParams, setSearchParams] = useSearchParams();
+  const { state, dispatch } = useContext(AppContext);
   const email = searchParams.get("email") || null;
   if (!email) return <Navigate to={"/login"} />;
   const navigate = useNavigate();

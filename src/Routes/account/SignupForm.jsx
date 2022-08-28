@@ -25,8 +25,8 @@ import { AppContext } from "../../context/AppContext";
 const SignupForm = () => {
   const [isMailSent, setIsMailSent] = useState(false);
   const { state, dispatch } = useContext(AppContext);
-  const navigate = useNavigate();
   const [searchParams, setSearchParams] = useSearchParams();
+  const navigate = useNavigate();
   const email = searchParams.get("email") || null;
   if (!email) return <Navigate to={"/login"} />;
 
