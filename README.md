@@ -1,6 +1,6 @@
 # hurried-hospital-4011
 
-https://in.indeed.com/
+https://indeed-eight.vercel.app/
 
  #  Indeed CLONE (hurried-hospital-4011)
  
