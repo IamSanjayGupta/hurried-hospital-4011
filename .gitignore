@@ -23,7 +23,7 @@ yarn-debug.log*
 yarn-error.log*
 
 # environmental file
-.env
+# .env
 .vercel
 
 # Local Netlify folder
