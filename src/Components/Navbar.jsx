@@ -28,6 +28,8 @@ import { MdReviews, MdHelp } from "react-icons/md";
 import { FaUserAlt, FaBell } from "react-icons/fa";
 import { ImProfile, ImHeart, ImCogs, ImMail } from "react-icons/im";
 import { AppContext } from "../context/AppContext";
+import { setAuth, setEmail } from "../context/AppAction";
+import { capitalize } from "../utils/polyfills";
 const Links = [
   { path: "/jobs", name: "Find Jobs" },
   { path: "/companyReviews", name: "Company reviews" },
@@ -60,6 +62,10 @@ const Navbar = () => {
   const { state, dispatch } = useContext(AppContext);
   const { isOpen, onOpen, onClose } = useDisclosure();
   const navigate = useNavigate();
+  const signOut = () => {
+    dispatch(setAuth(false));
+    dispatch(setEmail(""));
+  };
   return (
     <>
       <Box px={4} shadow={"sm"}>
@@ -125,15 +131,17 @@ const Navbar = () => {
                   <FaUserAlt />
                 </MenuButton>
                 <MenuList mt={-2}>
-                  <MenuGroup title={state.email}>
+                  <MenuGroup title={capitalize(state.email)}>
                     <MenuItem icon={<ImProfile />}>Profile</MenuItem>
                     <MenuItem icon={<ImHeart />}>My Jobs</MenuItem>
                     <MenuItem icon={<MdReviews />}>My reviews</MenuItem>
                     <MenuItem icon={<ImMail />}>Email Settings</MenuItem>
-                    <MenuItem icon={<ImCogs />}>Settings</MenuItem>
+                    <MenuItem icon={<ImCogs />} onClick={() => navigate("/settings")}>
+                      Settings
+                    </MenuItem>
                     <MenuItem icon={<MdHelp />}>Help Center</MenuItem>
                     <MenuDivider />
-                    <MenuItem>Sign out</MenuItem>
+                    <MenuItem onClick={() => signOut()}>Sign out</MenuItem>
                   </MenuGroup>
                 </MenuList>
               </Menu>
@@ -160,15 +168,17 @@ const Navbar = () => {
                   <FaUserAlt />
                 </MenuButton>
                 <MenuList mt={-2}>
-                  <MenuGroup title={state.email}>
+                  <MenuGroup title={capitalize(state.email)}>
                     <MenuItem icon={<ImProfile />}>Profile</MenuItem>
                     <MenuItem icon={<ImHeart />}>My Jobs</MenuItem>
                     <MenuItem icon={<MdReviews />}>My reviews</MenuItem>
                     <MenuItem icon={<ImMail />}>Email Settings</MenuItem>
-                    <MenuItem icon={<ImCogs />}>Settings</MenuItem>
+                    <MenuItem icon={<ImCogs />} onClick={() => navigate("/settings")}>
+                      Settings
+                    </MenuItem>
                     <MenuItem icon={<MdHelp />}>Help Center</MenuItem>
                     <MenuDivider />
-                    <MenuItem>Sign out</MenuItem>
+                    <MenuItem onClick={() => signOut()}>Sign out</MenuItem>
                   </MenuGroup>
                 </MenuList>
               </Menu>

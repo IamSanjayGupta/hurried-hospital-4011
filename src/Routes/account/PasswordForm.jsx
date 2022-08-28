@@ -21,21 +21,22 @@ import FooterNormal from "../../components/FooterNormal";
 import { checkEmailApi, checkEmailPassApi } from "../../utils/api";
 import { decrypt } from "../../utils/ecryptDecrypt";
 import { AppContext } from "../../context/AppContext";
-import { setAuth, setEmail } from "../../context/AppAction";
+import { setAuth, setEmail, setLoading } from "../../context/AppAction";
 
 const PasswordForm = () => {
+  const [accountErr, setAccountErr] = useState(false);
+  const [password, setPassword] = useState("");
   const [searchParams, setSearchParams] = useSearchParams();
+  const { state, dispatch } = useContext(AppContext);
   const email = searchParams.get("email") || null;
   if (!email) return <Navigate to={"/login"} />;
-  const [password, setPassword] = useState("");
-  const [accountErr, setAccountErr] = useState(false);
-  let navigate = useNavigate();
-  const { state, dispatch } = useContext(AppContext);
+  const navigate = useNavigate();
 
   if (accountErr) setTimeout(() => setAccountErr(false), 4000);
 
   const handleForm = (e) => {
     e.preventDefault();
+    dispatch(setLoading(true));
     checkEmailApi({ email: email.toLowerCase() })
       .then((res) => {
         if (decrypt(res.data[0].password) === password) {
@@ -50,7 +51,7 @@ const PasswordForm = () => {
       .catch((err) => {
         console.error(err);
       })
-      .finally();
+      .finally(() => dispatch(setLoading(false)));
   };
 
   return (
@@ -113,7 +114,15 @@ const PasswordForm = () => {
                 policies.
               </Highlight>
             </Text>
-            <Button w="100%" my="5" type="submit" colorScheme="facebook" fontWeight={"bold"}>
+            <Button
+              w="100%"
+              my="5"
+              type="submit"
+              colorScheme="facebook"
+              fontWeight={"bold"}
+              isLoading={state.isLoading ? "YES" : ""}
+              loadingText="Signing In..."
+            >
               Sign In
             </Button>
           </form>

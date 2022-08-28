@@ -1,9 +1,12 @@
 import { SearchIcon } from "@chakra-ui/icons";
 import { Button, Container, Flex, Heading, VStack } from "@chakra-ui/react";
-import React from "react";
+import React, { useContext } from "react";
+import { useNavigate } from "react-router-dom";
+import { setWhat } from "../context/AppAction";
+import { AppContext } from "../context/AppContext";
 
 let tags = [
-  "Software Developer Fresher",
+  "Java Developer",
   "Work From Home",
   "Driver",
   "HR Fresher",
@@ -15,6 +18,9 @@ let tags = [
   "Seo Executive",
 ];
 const PopulerSearches = () => {
+  const { state, dispatch } = useContext(AppContext);
+  const navigate = useNavigate();
+
   return (
     <Container maxW="container.lg" my={5}>
       <VStack>
@@ -30,6 +36,10 @@ const PopulerSearches = () => {
                 fontWeight={400}
                 _focus={{
                   boxShadow: "0 0 0 2px #fff, 0 0 0 4px #085ff7",
+                }}
+                onClick={() => {
+                  dispatch(setWhat(tag));
+                  navigate("/jobs");
                 }}
               >
                 {tag}

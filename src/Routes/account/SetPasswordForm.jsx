@@ -15,13 +15,15 @@ import {
   Text,
   VStack,
 } from "@chakra-ui/react";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import logo from "../../assets/Icons/Logo.svg";
 import { useNavigate, useParams } from "react-router-dom";
 import { StarIcon } from "@chakra-ui/icons";
 import FooterNormal from "../../components/FooterNormal";
 import { addUsers, checkTokenApi, removeTokenApi } from "../../utils/api";
 import { ecrypt } from "../../utils/ecryptDecrypt";
+import { setAuth, setLoading } from "../../context/AppAction";
+import { AppContext } from "../../context/AppContext";
 
 const SetPasswordForm = () => {
   const { token } = useParams();
@@ -32,6 +34,7 @@ const SetPasswordForm = () => {
   const [confirmPassword, setconfirmPassword] = useState("");
   const [isNotMached, setIsNotMatched] = useState(false);
   const [id, setID] = useState("");
+  const { state, dispatch } = useContext(AppContext);
 
   const handleForm = (e) => {
     e.preventDefault();
@@ -46,6 +49,7 @@ const SetPasswordForm = () => {
       date: new Date().toLocaleString("en-GB", { timeZone: "Asia/Kolkata" }),
     };
 
+    dispatch(setLoading(true));
     addUsers({ data })
       .then((res) => {
         removeTokenApi({ id }).then((res) => {
@@ -53,7 +57,7 @@ const SetPasswordForm = () => {
         });
       })
       .catch((err) => console.error(err))
-      .finally();
+      .finally(() => dispatch(setLoading(false)));
   };
 
   useEffect(() => {
@@ -142,7 +146,15 @@ const SetPasswordForm = () => {
 
               {isNotMached ? <FormErrorMessage>Password not matching.</FormErrorMessage> : null}
             </FormControl>
-            <Button type="submit" colorScheme="facebook" fontWeight={"bold"} w="100%" my="5">
+            <Button
+              type="submit"
+              colorScheme="facebook"
+              fontWeight={"bold"}
+              w="100%"
+              my="5"
+              isLoading={state.isLoading ? "YES" : ""}
+              loadingText="Creating account..."
+            >
               Submit
             </Button>
           </form>

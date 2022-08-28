@@ -9,6 +9,10 @@ const initState = {
   what: "",
   where: "",
   jobs: [],
+  selectedJob: {},
+  remote: "",
+  datePosted: "",
+  jobType: "",
 };
 
 export const AppContext = createContext();

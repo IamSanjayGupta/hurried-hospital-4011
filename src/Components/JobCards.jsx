@@ -13,8 +13,9 @@ import {
 import React from "react";
 import { getJobBullets } from "../utils/polyfills";
 
-const JobCards = ({ props }) => {
-  const { job_title, company_name, category, city, is_remote, state, html_job_description } = props;
+const JobCards = ({ props, selectJob }) => {
+  const { id, job_title, company_name, category, city, is_remote, state, html_job_description } =
+    props;
   let jobBullets = getJobBullets(html_job_description);
 
   return (
@@ -31,6 +32,7 @@ const JobCards = ({ props }) => {
       }}
       boxSizing="border-box"
       cursor={"pointer"}
+      onClick={() => selectJob(id)}
     >
       <Heading as="h2" size="sm" color={"blackAlpha.800"}>
         {job_title}
@@ -47,7 +49,7 @@ const JobCards = ({ props }) => {
         <TagLeftIcon as={BiCategory} />
         <TagLabel>{category}</TagLabel>
       </Tag>
-      <Text maxH={"150px"} overflow="hidden" p={2}>
+      <Box maxH={"150px"} overflow="hidden" p={2}>
         <UnorderedList listStyleType={"circle"}>
           {jobBullets.map((item) => {
             return (
@@ -60,7 +62,7 @@ const JobCards = ({ props }) => {
         {jobBullets.length < 3 ? (
           <Box dangerouslySetInnerHTML={{ __html: html_job_description }} />
         ) : null}
-      </Text>
+      </Box>
     </Box>
   );
 };
