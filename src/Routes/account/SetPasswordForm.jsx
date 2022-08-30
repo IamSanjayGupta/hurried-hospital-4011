@@ -122,6 +122,7 @@ const SetPasswordForm = () => {
                   borderColor: "rgb(37, 87, 167)",
                   boxShadow: "rgb(37 87 167) 0px -3px 0px 0px inset",
                 }}
+                required
                 onChange={(e) => setPassword(e.target.value)}
               />
             </FormControl>
@@ -141,6 +142,7 @@ const SetPasswordForm = () => {
                   borderColor: "rgb(37, 87, 167)",
                   boxShadow: "rgb(37 87 167) 0px -3px 0px 0px inset",
                 }}
+                required
                 onChange={(e) => setconfirmPassword(e.target.value)}
               />
 
