@@ -1,6 +1,5 @@
 export const ApplicationTemplate = (props) => {
   const { job_title, company_name, city, state, html_job_description } = props;
-  console.log(props);
   return `<div>
 <table dir="rtl" width="100%" cellpadding="0" cellspacing="0" border="0" role="presentation">
   <tbody>

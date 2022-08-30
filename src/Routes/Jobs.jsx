@@ -12,6 +12,7 @@ import {
   Heading,
   HStack,
   Text,
+  useToast,
   VStack,
 } from "@chakra-ui/react";
 import { getJobsApi } from "../utils/api";
@@ -26,6 +27,7 @@ const Jobs = () => {
   const { state, dispatch } = useContext(AppContext);
   const [sendingEmail, setSendingEmail] = useState(false);
   const [page, setPage] = useState(1);
+  const toast = useToast();
 
   let filterBtn = [
     {
@@ -62,7 +64,15 @@ const Jobs = () => {
 
   const handleApplyBtn = () => {
     if (!state.email) {
-      alert("Please login to apply any Job");
+      toast({
+        title: "Please login to apply any Job.",
+        // description: "Please login to apply any Job.",
+        status: "error",
+        duration: 2000,
+        position: "top-right",
+        isClosable: true,
+      });
+      // alert("Please login to apply any Job");
       return;
     }
 
