@@ -72,7 +72,6 @@ const Jobs = () => {
         position: "top-right",
         isClosable: true,
       });
-      // alert("Please login to apply any Job");
       return;
     }
 
