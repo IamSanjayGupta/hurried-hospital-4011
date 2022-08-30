@@ -67,6 +67,7 @@ const Jobs = () => {
   ];
 
   const selectJob = (id) => {
+    console.log(screen.width);
     dispatch(setSelectedJob({ ...state.jobs.filter((job) => job.id === id)[0] }));
   };
 
@@ -132,6 +133,7 @@ const Jobs = () => {
   }, [page]);
 
   useEffect(() => {
+    if (!state.what) return;
     if (flag) {
       dispatch(setLoading(true));
       getJobsApi({
