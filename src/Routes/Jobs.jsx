@@ -107,7 +107,7 @@ const Jobs = () => {
   // console.log(new Date().addDays(-14).toISOString().slice(0, 10));
 
   const handleItemClick = (name, key) => {
-    console.log(name, key);
+    // console.log(name, key);
     if (name === "Remote") {
       dispatch(setRemote(`&is_remote=${key}`));
     } else if (name === "Date Posted") {
