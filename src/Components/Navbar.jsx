@@ -50,7 +50,7 @@ const NavLink1 = ({ path, name }) => (
   <NavLink
     to={path}
     style={({ isActive }) =>
-      isActive ? { borderBottom: "2px Solid blue", fontWeight: "600" } : undefined
+      isActive ? { borderBottom: "2px Solid #164081", fontWeight: "600" } : undefined
     }
     className="customeLinks"
   >

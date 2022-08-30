@@ -15,18 +15,19 @@ code {
   transition-property: var(--chakra-transition-property-common);
   transition-duration: var(--chakra-transition-duration-fast);
   transition-timing-function: var(--chakra-transition-easing-ease-out);
-  cursor: pointer;
-  -webkit-text-decoration: none;
-  text-decoration: none;
-  outline: 2px solid transparent;
-  outline-offset: 2px;
   color: inherit;
-  width: fit-content;
   padding-inline-start: var(--chakra-space-2);
   padding-inline-end: var(--chakra-space-2);
   padding-top: var(--chakra-space-5);
   padding-bottom: var(--chakra-space-5);
 }
 .customeLinks:hover {
-  border-bottom: 2px Solid blue;
+  border-bottom: 2px Solid #164081;
+}
+
+@media all and (min-width: 770px) and (max-width: 945px) {
+  .customeLinks {
+    padding-top: var(--chakra-space-2);
+    padding-bottom: var(--chakra-space-2);
+  }
 }
