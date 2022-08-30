@@ -41,6 +41,7 @@ export const getJobsApi = ({ what, where, page = 1, filter }) => {
   if (filter) query += `${filter}`;
   query += `&_page=${page}&_limit=15`;
   let url = `${process.env.REACT_APP_BASE_URL_API}/jobs${query}`;
+  // console.log(url);
   return axios.get(url);
 };
 

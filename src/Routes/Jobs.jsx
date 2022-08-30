@@ -19,7 +19,14 @@ import { getJobsApi } from "../utils/api";
 import { capitalize, getJobBullets } from "../utils/polyfills";
 import { AppContext } from "../context/AppContext";
 import JobCards from "../components/JobCards";
-import { addJob, setLoading, setSelectedJob } from "../context/AppAction";
+import {
+  addJob,
+  setDatePosted,
+  setJobType,
+  setLoading,
+  setRemote,
+  setSelectedJob,
+} from "../context/AppAction";
 import { ApplicationTemplate } from "../utils/email_Templates/ApplicationTemplate";
 import { sendMail } from "../utils/mailer";
 import Pagination from "../components/Pagination";
@@ -28,32 +35,33 @@ const Jobs = () => {
   const [sendingEmail, setSendingEmail] = useState(false);
   const [page, setPage] = useState(1);
   const toast = useToast();
+  const [flag, setflag] = useState(false);
 
   let filterBtn = [
     {
       name: "Date Posted",
       childs: [
-        { key: "a", name: "Last 24 Hours" },
-        { key: "a", name: "Last 3 days" },
-        { key: "a", name: "Last 7 days" },
-        { key: "a", name: "Last 14 days" },
+        { key: 1, name: "Last 24 Hours" },
+        { key: 3, name: "Last 3 days" },
+        { key: 7, name: "Last 7 days" },
+        { key: 14, name: "Last 14 days" },
       ],
     },
     {
       name: "Job Type",
       childs: [
-        { key: "&job_type=Full-time", name: "Full-time" },
-        { key: "&job_type=Part-time", name: "Part-time" },
-        { key: "&job_type=Contract", name: "Contract" },
-        { key: "&job_type=Fresher", name: "Fresher" },
-        { key: "&job_type=Internship", name: "Internship" },
+        { key: "Full-time", name: "Full-time" },
+        { key: "Part-time", name: "Part-time" },
+        { key: "Contract", name: "Contract" },
+        { key: "Fresher", name: "Fresher" },
+        { key: "Internship", name: "Internship" },
       ],
     },
     {
       name: "Remote",
       childs: [
-        { key: "&is_remote=true", name: "YES" },
-        { key: "&is_remote=false", name: "NO" },
+        { key: "true", name: "YES" },
+        { key: "false", name: "NO" },
       ],
     },
   ];
@@ -91,6 +99,26 @@ const Jobs = () => {
       .finally(() => setSendingEmail(false));
   };
 
+  Date.prototype.addDays = function (days) {
+    const date = new Date(this.valueOf());
+    date.setDate(date.getDate() + days);
+    return date;
+  };
+  // console.log(new Date().addDays(-14).toISOString().slice(0, 10));
+
+  const handleItemClick = (name, key) => {
+    console.log(name, key);
+    if (name === "Remote") {
+      dispatch(setRemote(`&is_remote=${key}`));
+    } else if (name === "Date Posted") {
+      dispatch(
+        setDatePosted(`&post_date_gte=${new Date().addDays(-key).toISOString().slice(0, 10)}`)
+      );
+    } else if (name === "Job Type") {
+      dispatch(setJobType(`&job_type=${key}`));
+    }
+  };
+
   useEffect(() => {
     if (!state.what) return;
     dispatch(setLoading(true));
@@ -103,13 +131,31 @@ const Jobs = () => {
       .finally(() => dispatch(setLoading(false)));
   }, [page]);
 
+  useEffect(() => {
+    if (flag) {
+      dispatch(setLoading(true));
+      getJobsApi({
+        what: capitalize(state.what),
+        where: capitalize(state.where),
+        filter: state.remote + state.datePosted + state.jobType,
+      })
+        .then((res) => {
+          dispatch(addJob(res.data));
+          dispatch(setSelectedJob({ ...res.data[0] }));
+        })
+        .catch((err) => console.error(err))
+        .finally(() => dispatch(setLoading(false)));
+    }
+    setflag(true);
+  }, [state.remote, state.datePosted, state.jobType]);
+
   return (
     <>
       <Navbar />
       <SearchInput />
       <Container maxW={"container.lg"}>
         {filterBtn.map((btn, i) => {
-          return <FilterButton key={i} data={btn} />;
+          return <FilterButton key={i} data={btn} handleItemClick={handleItemClick} />;
         })}
       </Container>
       <Divider bg={"gray.300"} my="5" />
