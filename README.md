@@ -23,6 +23,17 @@
 ## Link 
 https://indeed-eight.vercel.app/
 
+## How to run locally ?
+ 1. clone it
+ 2. Install node_modules
+     ```
+      npm i
+     ```
+ 3. start it
+     ```
+     npm run start
+     ```
+
 ## Contributor  😇
 
 - 👤 [Sanjay Gupta](https://github.com/IamSanjayGupta)
