@@ -10,12 +10,13 @@ import {
   Text,
   UnorderedList,
 } from "@chakra-ui/react";
-import React from "react";
+import React, { useContext } from "react";
 import { getJobBullets } from "../utils/polyfills";
+import { AppContext } from "../context/AppContext";
 
 const JobCards = ({ props, selectJob }) => {
-  const { id, job_title, company_name, category, city, is_remote, state, html_job_description } =
-    props;
+  const { state, dispatch } = useContext(AppContext);
+  const { id, job_title, company_name, category, city, is_remote, html_job_description } = props;
   let jobBullets = getJobBullets(html_job_description);
 
   return (
@@ -34,7 +35,7 @@ const JobCards = ({ props, selectJob }) => {
       cursor={"pointer"}
       onClick={() => {
         if (screen.width <= 767) {
-          localStorage.setItem("selectedJob", JSON.stringify(props));
+          localStorage.setItem("selectedJob", JSON.stringify({ ...props, email: state.email }));
           window.open("/jobdetails");
         } else selectJob(id);
       }}
@@ -44,7 +45,7 @@ const JobCards = ({ props, selectJob }) => {
       </Heading>
       <Text>{company_name}</Text>
       <Text>
-        {city}, {state}
+        {city}, {props.state}
       </Text>
       <Tag>
         <TagLeftIcon as={HiOutlineOfficeBuilding} />

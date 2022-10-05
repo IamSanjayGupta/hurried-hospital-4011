@@ -1,9 +1,16 @@
 import { Box, Button, Heading, Text, VStack } from "@chakra-ui/react";
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { AppContext } from "../context/AppContext";
 
 const SingleJobDetails = () => {
-  const { state, dispatch } = useContext(AppContext);
+  const [sendingEmail, setSendingEmail] = useState(false);
+  const selectedJob = JSON.parse(localStorage.getItem("selectedJob"));
+  const { id, job_title, company_name, category, city, is_remote, state, html_job_description } =
+    selectedJob;
+
+  useEffect(() => {
+    document.title = job_title;
+  }, []);
 
   return (
     <VStack
@@ -17,13 +24,13 @@ const SingleJobDetails = () => {
     >
       <Box w={"100%"} position={"sticky"} top={1} boxShadow="md" height={"fit-content"} px="5">
         <Heading as="h2" size="sm" color={"blackAlpha.800"}>
-          {state.selectedJob.job_title}
+          {job_title}
         </Heading>
         <Text color={"blue"} fontSize="16px">
-          {state.selectedJob.company_name}
+          {company_name}
         </Text>
         <Text fontSize="sm">
-          {state.selectedJob.city}, {state.selectedJob.state}
+          {city}, {state}
         </Text>
         <Button
           colorScheme="blue"
@@ -43,7 +50,7 @@ const SingleJobDetails = () => {
         height={"78%"}
         overflowX="hidden"
         overflowY="auto"
-        dangerouslySetInnerHTML={{ __html: state.selectedJob.html_job_description }}
+        dangerouslySetInnerHTML={{ __html: html_job_description }}
       />
     </VStack>
   );
