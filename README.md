@@ -1,5 +1,5 @@
 
-#  Indeed CLONE (hurried-hospital-4011)
+#  [Indeed CLONE](https://indeed-eight.vercel.app) (hurried-hospital-4011)
  
  ## Description
  Indeed is an  worldwide employment website for job listings. With Indeed, you can search millions of jobs online to find the next step in your career. With tools for job search, resumes, company reviews and more
@@ -22,6 +22,17 @@
 
 ## Link 
 https://indeed-eight.vercel.app/
+
+## How to run locally ?
+ 1. clone it
+ 2. Install node_modules
+     ```
+      npm i
+     ```
+ 3. start it
+     ```
+     npm run start
+     ```
 
 ## Contributor  😇
 
