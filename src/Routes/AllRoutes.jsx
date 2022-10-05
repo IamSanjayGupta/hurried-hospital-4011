@@ -1,6 +1,7 @@
 import React from "react";
 import { Route, Routes } from "react-router-dom";
 import PrivateRoute from "../components/PrivateRoute";
+import ForgetPassword from "./account/ForgetPassword";
 import LoginForm from "./account/LoginForm";
 import PasswordForm from "./account/PasswordForm";
 import SetPasswordForm from "./account/SetPasswordForm";
@@ -17,6 +18,7 @@ const AllRoutes = () => {
       <Route path={"/login"} element={<LoginForm />} />
       <Route path={"/signup"} element={<SignupForm />} />
       <Route path={"/password"} element={<PasswordForm />} />
+      <Route path={"/forgetPassword"} element={<ForgetPassword />} />
       <Route path={"/setPassword/:token"} element={<SetPasswordForm />} />
       <Route path={"/jobs"} element={<Jobs />} />
       <Route path={"/jobdetails"} element={<JobDetails />} />

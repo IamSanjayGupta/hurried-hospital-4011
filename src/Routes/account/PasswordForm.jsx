@@ -126,9 +126,11 @@ const PasswordForm = () => {
               Sign In
             </Button>
           </form>
-          <Button colorScheme="facebook" fontWeight={"bold"} variant={"ghost"}>
-            Forget Password?
-          </Button>
+          <Link to="/forgetPassword">
+            <Button colorScheme="facebook" fontWeight={"bold"} variant={"ghost"} w="100%">
+              Forget Password?
+            </Button>
+          </Link>
         </VStack>
       </Container>
       <FooterNormal />
