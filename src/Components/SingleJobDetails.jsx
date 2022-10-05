@@ -1,6 +1,6 @@
 import { Box, Button, Heading, Text, VStack } from "@chakra-ui/react";
 import React, { useContext } from "react";
-import { AppContext } from "../../context/AppContext";
+import { AppContext } from "../context/AppContext";
 
 const SingleJobDetails = () => {
   const { state, dispatch } = useContext(AppContext);

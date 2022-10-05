@@ -32,7 +32,12 @@ const JobCards = ({ props, selectJob }) => {
       }}
       boxSizing="border-box"
       cursor={"pointer"}
-      onClick={() => selectJob(id)}
+      onClick={() => {
+        if (screen.width <= 767) {
+          localStorage.setItem("selectedJob", JSON.stringify(props));
+          window.open("/jobdetails");
+        } else selectJob(id);
+      }}
     >
       <Heading as="h2" size="sm" color={"blackAlpha.800"}>
         {job_title}

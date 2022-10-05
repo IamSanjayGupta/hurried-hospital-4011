@@ -67,6 +67,9 @@ const Jobs = () => {
   ];
 
   const selectJob = (id) => {
+    if (screen.width <= 767) {
+      console.log(screen.width);
+    }
     dispatch(setSelectedJob({ ...state.jobs.filter((job) => job.id === id)[0] }));
   };
 
