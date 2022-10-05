@@ -7,12 +7,11 @@ const SingleJobDetails = () => {
 
   return (
     <VStack
-      w={"50%"}
+      w={"96%"}
       rounded="md"
-      display={{ base: "none", md: "block" }}
-      position="sticky"
-      top={1}
-      height={"98vh"}
+      m="auto"
+      my={5}
+      height={"85vh"}
       overflowY="hidden"
       boxShadow="rgba(0, 0, 0, 0.82) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px"
     >

@@ -70,7 +70,7 @@ const PasswordForm = () => {
           <Heading fontSize={22}>Welcome Back</Heading>
           <Text>
             Signing in as <b>{email} </b>
-            <Link to="/singup" style={{ color: "blue" }}>
+            <Link to="/login" style={{ color: "blue" }}>
               (not you?)
             </Link>
           </Text>
