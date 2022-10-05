@@ -34,7 +34,7 @@ const JobCards = ({ props, selectJob }) => {
       boxSizing="border-box"
       cursor={"pointer"}
       onClick={() => {
-        if (screen.width <= 767) {
+        if (window.screen.width <= 767) {
           localStorage.setItem("selectedJob", JSON.stringify({ ...props, email: state.email }));
           window.open("/jobdetails");
         } else selectJob(id);
