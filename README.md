@@ -38,3 +38,26 @@ https://indeed-eight.vercel.app/
 
 - 👤 [Sanjay Gupta](https://github.com/IamSanjayGupta)
 
+## Screenshots  📸
+
+
+#### Homepage
+
+<img src="https://raw.githubusercontent.com/IamSanjayGupta/IamSanjayGupta.github.io/main/src/assets/indeed/1.png" alt="homepage" />
+
+
+#### Job Search and apply
+
+<img src="https://raw.githubusercontent.com/IamSanjayGupta/IamSanjayGupta.github.io/main/src/assets/indeed/2.png" alt="jobs" />
+
+
+#### Profile
+
+<img src="https://raw.githubusercontent.com/IamSanjayGupta/IamSanjayGupta.github.io/main/src/assets/indeed/3.png" alt="Profile" />
+
+
+#### Signup/Login 
+
+<img src="https://raw.githubusercontent.com/IamSanjayGupta/IamSanjayGupta.github.io/main/src/assets/indeed/4.png" alt="signup" />
+
+
